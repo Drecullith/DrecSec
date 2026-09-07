@@ -2,13 +2,37 @@ import { useEffect } from 'react'
 import { SectionHeading } from '../components/SectionHeading'
 import { omarchyPullRequests } from '../data/omarchy.generated'
 
-const summaries: Record<number, string> = {
-  10623: 'Corrects the public on/off semantics for the bar while preserving the underlying negated bar-off state flag and normal toggle behavior.',
-  10535: 'Keeps terminal text paste behavior unchanged while letting image-aware applications receive staged image clipboard data correctly.',
-  10513: 'Prevents browser-specific codec preload variables from leaking into yt-dlp, ffmpeg, and other helpers spawned by the Chromium native messaging host.',
-  10501: 'Keeps discovery, pairing, connecting, and forgetting on the same Bluetooth controller on multi-adapter systems.',
-  10497: 'Moves delayed GVfs recovery into a transient systemd unit so the recovery survives sleep-hook cgroup teardown after resume.',
-  10490: 'Separates class-wide privacy protection from generic floating geometry so fixed-size browser unlock popups are not forced into main-window dimensions.',
+const details: Record<number, { summary: string; issue?: string; test?: string }> = {
+  10623: {
+    summary: 'Corrects the public on/off semantics for the bar while preserving the underlying negated bar-off state flag and normal toggle behavior.',
+    issue: '#10621',
+    test: 'test/shell.d/toggle-test.sh',
+  },
+  10535: {
+    summary: 'Keeps terminal text paste behavior unchanged while letting image-aware applications receive staged image clipboard data correctly.',
+    issue: '#10526',
+    test: 'test/shell.d/clipboard-file-paste-test.sh',
+  },
+  10513: {
+    summary: 'Prevents browser-specific codec preload variables from leaking into yt-dlp, ffmpeg, and other helpers spawned by the Chromium native messaging host.',
+    issue: '#10469',
+    test: 'test/shell.d/chromium-ytdlp-preload-test.sh',
+  },
+  10501: {
+    summary: 'Keeps discovery, pairing, connecting, and forgetting on the same Bluetooth controller on multi-adapter systems.',
+    issue: '#10479',
+    test: 'test/shell.d/bluetooth-multi-adapter-test.sh',
+  },
+  10497: {
+    summary: 'Moves delayed GVfs recovery into a transient systemd unit so the recovery survives sleep-hook cgroup teardown after resume.',
+    issue: '#10450',
+    test: 'test/shell.d/unmount-fuse-test.sh',
+  },
+  10490: {
+    summary: 'Separates class-wide privacy protection from generic floating geometry so fixed-size browser unlock popups are not forced into main-window dimensions.',
+    issue: '#9904',
+    test: 'test/shell.d/hyprland-1password-rules-test.sh',
+  },
 }
 
 const tools = [
@@ -34,12 +58,20 @@ function formatDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(value))
 }
 
+function effectiveIssue(number: number, generated: string | null) {
+  return generated ?? details[number]?.issue ?? null
+}
+
+function effectiveTest(number: number, generated: string | null) {
+  return generated ?? details[number]?.test ?? null
+}
+
 export function OmarchyContributionsPage() {
   useEffect(() => {
     document.title = 'Omarchy Contributions — DrecSec'
   }, [])
 
-  const testedFixes = omarchyPullRequests.filter((pr) => pr.test).length
+  const testedFixes = omarchyPullRequests.filter((pr) => effectiveTest(pr.number, pr.test)).length
 
   return (
     <main className="case-study">
@@ -65,24 +97,30 @@ export function OmarchyContributionsPage() {
         <SectionHeading
           kicker="01 / Upstream"
           title="Real issues. Focused fixes."
-          body="This list is generated from public GitHub metadata for Drecullith's upstream Omarchy pull requests. Curated summaries stay deliberately manual so the portfolio does not invent claims that are not backed by review evidence."
+          body="The PR list and status come from public GitHub metadata. Technical summaries stay curated so automation never invents claims or republishes unnecessary account data."
         />
         <div className="case-pr-list">
-          {omarchyPullRequests.map((pr) => (
-            <a className="case-pr-card" href={pr.href} target="_blank" rel="noreferrer" key={pr.number}>
-              <div className="case-pr-id"><strong>PR #{pr.number}</strong><span>{formatDate(pr.createdAt)}</span></div>
-              <div className="case-pr-copy">
-                <h3>{pr.title}</h3>
-                <p>{summaries[pr.number] ?? 'Public upstream contribution by Drecullith. Open the review trail for the issue context, diff, tests, and maintainer discussion.'}</p>
-                <div className="case-pr-meta">
-                  <span>{pr.state.toUpperCase()}</span>
-                  {pr.issue ? <span>Issue {pr.issue}</span> : null}
-                  {pr.test ? <code>{pr.test}</code> : null}
+          {omarchyPullRequests.map((pr) => {
+            const detail = details[pr.number]
+            const issue = effectiveIssue(pr.number, pr.issue)
+            const test = effectiveTest(pr.number, pr.test)
+
+            return (
+              <a className="case-pr-card" href={pr.href} target="_blank" rel="noreferrer" key={pr.number}>
+                <div className="case-pr-id"><strong>PR #{pr.number}</strong><span>{formatDate(pr.createdAt)}</span></div>
+                <div className="case-pr-copy">
+                  <h3>{pr.title}</h3>
+                  <p>{detail?.summary ?? 'Public upstream contribution by Drecullith. Open the review trail for the issue context, diff, tests, and maintainer discussion.'}</p>
+                  <div className="case-pr-meta">
+                    <span>{pr.state.toUpperCase()}</span>
+                    {issue ? <span>Issue {issue}</span> : null}
+                    {test ? <code>{test}</code> : null}
+                  </div>
                 </div>
-              </div>
-              <span className="case-pr-arrow" aria-hidden="true">↗</span>
-            </a>
-          ))}
+                <span className="case-pr-arrow" aria-hidden="true">↗</span>
+              </a>
+            )
+          })}
         </div>
       </section>
 

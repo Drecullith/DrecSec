@@ -10,7 +10,7 @@ The application is intentionally static and does not expose visitor authenticati
 
 No critical or high-severity application findings were identified during the source/configuration review.
 
-The latest pre-hardening CI run installed 25 packages and reported **0 npm vulnerabilities**. TypeScript checking and the production build also passed.
+The audited CI run reported **0 npm vulnerabilities**. TypeScript checking and the production build also passed.
 
 ## Checks performed
 
@@ -37,27 +37,26 @@ The CSP now starts from `default-src 'none'` and explicitly disables forms, obje
 
 ### CI supply-chain hardening
 
-GitHub Actions previously referenced major-version tags. The workflow now pins checkout, Node setup, and artifact upload actions to exact commit SHAs and disables persisted checkout credentials.
+GitHub Actions are pinned to exact commit SHAs. Read-only workflows disable persisted checkout credentials. The dependency audit includes development/build dependencies as well as runtime packages because build tooling executes inside the trusted CI path.
 
-The npm audit now includes development/build dependencies as well as runtime packages, because build tooling executes inside the trusted CI path.
+### Dependency reproducibility
 
-### Dependency ranges
-
-Direct npm dependencies previously used caret ranges. They are now pinned to exact versions to reduce unintended direct dependency drift.
+Direct npm dependencies are pinned to exact versions and `package-lock.json` is committed. Normal CI uses `npm ci`, so dependency resolution is reproducible and fails when the manifest and lockfile disagree.
 
 ### Security policy drift
 
-`SECURITY.md` and the Cloudflare deployment notes still contained retired v0.2 authentication/Supabase language. They were rewritten to match the current portfolio-only architecture.
+`SECURITY.md` and retired deployment notes were updated to match the current portfolio-only architecture.
 
-## New regression guard
+## Regression guards
 
-`npm run security:check` now fails CI if required security headers disappear, the CSP regains `unsafe-inline`/`unsafe-eval`, or selected dangerous DOM/code-execution patterns are introduced into `src/`.
+- `npm run security:check` fails CI if required security headers disappear, the CSP regains `unsafe-inline`/`unsafe-eval`, or selected dangerous DOM/code-execution patterns are introduced into `src/`.
+- A production security workflow checks the live Vercel endpoint over TLS and verifies the expected security headers.
+- The Omarchy evidence sync runs in GitHub Actions and publishes only public pull-request metadata. Its GitHub token is short-lived and never ships to site visitors.
 
 ## Remaining hardening work
 
-- Commit and enforce an npm lockfile so transitive dependency resolution is fully reproducible; exact direct-version pins reduce drift but do not replace a lockfile.
-- Add an automated external post-deploy header/TLS check so repository configuration is continuously compared with the headers actually served at the production edge.
 - Protect the GitHub and Vercel owner accounts with strong MFA/passkeys and recovery controls; account compromise remains outside the application code trust boundary.
+- Consider branch/ruleset protection as the repository workflow matures, especially if additional contributors gain write access.
 - Repeat the security review whenever a backend, user input, uploads, analytics, third-party scripts, or other runtime integrations are introduced.
 
 ## Assessment
