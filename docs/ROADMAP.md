@@ -23,9 +23,10 @@ DrecSec is being built in small, reviewable releases with the portfolio itself a
 - Keep the public site credential-free
 - Keep GitHub → Vercel deployment, security headers, dependency auditing, typecheck, and production builds
 
-## v0.4 — Project depth
+## v0.4 — Project depth — in progress
 
 - Individual project detail pages
+- First case study: Omarchy Contributions with upstream PR evidence and finished utilities
 - Screenshots, architecture notes, milestones, and lessons learned
 - Better linking to source code and releases
 

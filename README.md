@@ -6,10 +6,12 @@ DrecSec is the public cybersecurity portfolio of **Drecullith**.
 
 The project stays deliberately evidence-first: real projects, open-source work, ethical labs, CTF methodology, write-ups, and a visible learning path instead of an invented expert persona.
 
-## Current scope — v0.3
+## Current scope — v0.4
 
 - Responsive public portfolio
 - Drecullith identity and project showcase
+- First full project case study: Omarchy Contributions
+- Evidence links to upstream pull requests and finished public utilities
 - Open-source contribution timeline
 - CTF / ethical-lab roadmap
 - Vercel security headers
@@ -45,7 +47,7 @@ npm run preview
 - **v0.1** — Portfolio foundation
 - **v0.2** — Auth/community experiment, now archived
 - **v0.3** — Portfolio reboot: static, credential-free, backend-free
-- **v0.4** — Project detail pages and technical write-ups
+- **v0.4** — Project detail pages and technical case studies — in progress
 - **v0.5** — GitHub activity, contributions, CTF/lab notes, and methodology
 - **v1.0** — Security review, accessibility audit, content polish, public portfolio release
 

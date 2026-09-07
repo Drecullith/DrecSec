@@ -19,9 +19,9 @@ export function Header() {
         <button className="menu-button" type="button" aria-label="Toggle navigation" aria-expanded={open} onClick={() => setOpen((value) => !value)}><span /><span /></button>
 
         <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
-          <a href="#about" onClick={close}>About</a>
-          <a href="#projects" onClick={close}>Projects</a>
-          <a href="#journey" onClick={close}>Journey</a>
+          <a href="/#about" onClick={close}>About</a>
+          <a href="/#projects" onClick={close}>Projects</a>
+          <a href="/#journey" onClick={close}>Journey</a>
           <a href="https://github.com/Drecullith" target="_blank" rel="noreferrer" onClick={close}>GitHub ↗</a>
         </nav>
       </div>

@@ -20,7 +20,7 @@ export function HomePage() {
       <section className="hero shell" aria-labelledby="hero-title">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <div className="status-pill"><span /> DrecSec v0.3 — building in public</div>
+          <div className="status-pill"><span /> DrecSec v0.4 — project depth</div>
           <p className="hero-kicker">CYBERSECURITY • OPEN SOURCE • CTF</p>
           <h1 id="hero-title">
             Learn the system.<br />
@@ -72,16 +72,24 @@ export function HomePage() {
           body="No invented expert persona. DrecSec records the real work: what was built, what failed, what changed, what was learned, and what can be demonstrated."
         />
         <div className="principles-grid">
-          <article><span>01</span><h3>Evidence over buzzwords</h3><p>Projects, commits, write-ups, reproducible labs, and clear explanations matter more than a wall of vague skill badges.</p></article>
-          <article><span>02</span><h3>Legal & permission-based</h3><p>Security work belongs in systems you own, intentionally vulnerable labs, CTFs, and environments where testing is explicitly authorized.</p></article>
-          <article><span>03</span><h3>Learn in public</h3><p>Progress stays visible. Beginner questions, review feedback, failed attempts, and improved methodology are part of the record.</p></article>
+          <article className="principle-card" tabIndex={0}><span>01</span><h3>Evidence over buzzwords</h3><p>Projects, commits, write-ups, reproducible labs, and clear explanations matter more than a wall of vague skill badges.</p></article>
+          <article className="principle-card" tabIndex={0}><span>02</span><h3>Legal & permission-based</h3><p>Security work belongs in systems you own, intentionally vulnerable labs, CTFs, and environments where testing is explicitly authorized.</p></article>
+          <article className="principle-card" tabIndex={0}><span>03</span><h3>Learn in public</h3><p>Progress stays visible. Beginner questions, review feedback, failed attempts, and improved methodology are part of the record.</p></article>
         </div>
       </section>
 
       <section id="projects" className="section shell">
-        <SectionHeading kicker="02 / Projects" title="The workbench." body="Active projects and the systems around them. Verified activity and write-ups will keep this portfolio grounded in real work." />
+        <SectionHeading kicker="02 / Projects" title="The workbench." body="Active projects and the systems around them. Verified activity and write-ups keep this portfolio grounded in real work." />
         <div className="project-grid">
-          {projects.map((project) => (
+          {projects.map((project) => project.href ? (
+            <a className="project-card project-card-link" href={project.href} key={project.title} aria-label={`Open ${project.title} case study`}>
+              <div className="project-meta"><span>{project.eyebrow}</span><span className="project-status">{project.status}</span></div>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+              <span className="project-card-cta">View case study <span aria-hidden="true">→</span></span>
+            </a>
+          ) : (
             <article className="project-card" key={project.title}>
               <div className="project-meta"><span>{project.eyebrow}</span><span className="project-status">{project.status}</span></div>
               <h3>{project.title}</h3>

@@ -6,6 +6,7 @@ export const projects = [
       'The site you are looking at: a public cybersecurity portfolio for ethical hacking, CTFs, open-source work, write-ups, and learning in public.',
     status: 'Building now',
     tags: ['React', 'TypeScript', 'Security by design'],
+    href: null,
   },
   {
     eyebrow: 'Ambient AI',
@@ -14,14 +15,16 @@ export const projects = [
       'A local-first assistant project for Linux and Omarchy: explain system events, surface problems clearly, and keep the user in control of every meaningful action.',
     status: 'In development',
     tags: ['Rust', 'Linux', 'Local-first'],
+    href: null,
   },
   {
     eyebrow: 'Open source',
     title: 'Omarchy Contributions',
     description:
-      'Learning Linux and software engineering by contributing upstream: reproducing issues, preparing focused fixes, and working through real review cycles.',
-    status: 'Active',
-    tags: ['Git', 'GitHub', 'Linux'],
+      'Learning Linux and software engineering by contributing upstream: reproducing issues, preparing focused fixes, adding regression tests, and shipping small tools with explicit safety boundaries.',
+    status: 'Case study',
+    tags: ['Git', 'Bash', 'Linux', 'Regression tests'],
+    href: '/projects/omarchy-contributions',
   },
   {
     eyebrow: 'Security learning',
@@ -30,6 +33,7 @@ export const projects = [
       'A future home for sanitized challenge notes, methodology, defensive takeaways, and legal lab write-ups as the cybersecurity journey develops.',
     status: 'Next up',
     tags: ['CTF', 'Write-ups', 'Methodology'],
+    href: null,
   },
 ]
 
