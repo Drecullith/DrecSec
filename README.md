@@ -12,11 +12,10 @@ The project stays deliberately evidence-first: real projects, open-source work, 
 - Drecullith identity and project showcase
 - First full project case study: Omarchy Contributions
 - Evidence links to upstream pull requests and finished public utilities
-- Automatic build-time sync of public Omarchy pull-request metadata
 - Open-source contribution timeline
 - CTF / ethical-lab roadmap
 - Vercel security headers
-- GitHub Actions dependency audit, typecheck, production build, and post-deploy security checks
+- GitHub Actions dependency audit, typecheck, and production build
 - No visitor accounts, passwords, member profiles, community posting, or live chat
 - No application database, auth provider, or realtime backend
 
@@ -58,6 +57,6 @@ The final v0.2 community build is preserved on `archive/v0.2-community-experimen
 
 DrecSec is for defensive and permission-based security learning. Content should target systems the tester owns, intentionally vulnerable labs, CTF environments, or systems with explicit authorization.
 
-The public site intentionally does not collect visitor credentials. The Omarchy sync publishes only metadata that is already public on GitHub and runs inside GitHub Actions; no GitHub token is shipped to the browser.
+The public site intentionally does not collect visitor credentials.
 
-See [SECURITY.md](./SECURITY.md), [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md), and [docs/SECURITY-AUDIT-2026-09-07.md](./docs/SECURITY-AUDIT-2026-09-07.md).
+See [SECURITY.md](./SECURITY.md), [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md), and [docs/REBOOT.md](./docs/REBOOT.md).
