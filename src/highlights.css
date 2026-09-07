@@ -1,0 +1,101 @@
+/* Shared highlight language for evidence-heavy and interactive portfolio surfaces. */
+
+.project-card,
+.case-stat,
+.case-pr-card,
+.case-tool-card,
+.case-method-grid article,
+.button {
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    background .22s ease;
+}
+
+/* Project cards should feel important even before every project has a detail page. */
+.project-card:hover,
+.project-card:focus-within,
+.project-card:active {
+  transform: translateY(-3px);
+  border-color: rgba(128,242,190,.42);
+  background: linear-gradient(160deg, rgba(19,31,29,.82), rgba(9,12,17,.55));
+  box-shadow:
+    0 18px 46px rgba(0,0,0,.28),
+    0 0 30px rgba(128,242,190,.085),
+    inset 0 0 38px rgba(128,242,190,.025);
+}
+
+/* Contribution snapshot: quieter than a link, but still worth drawing the eye to. */
+.case-stat:hover,
+.case-stat:active {
+  transform: translateY(-2px);
+  border-color: rgba(128,242,190,.34);
+  background: linear-gradient(155deg, rgba(18,31,28,.82), rgba(8,11,16,.66));
+  box-shadow:
+    0 16px 38px rgba(0,0,0,.24),
+    0 0 24px rgba(128,242,190,.065);
+}
+
+/* Evidence links get the clearest glow because they lead straight to verifiable work. */
+.case-pr-card:hover,
+.case-pr-card:focus-visible,
+.case-pr-card:active {
+  transform: translateY(-3px);
+  border-color: rgba(128,242,190,.46);
+  background: linear-gradient(155deg, rgba(18,31,28,.88), rgba(9,14,18,.78));
+  box-shadow:
+    0 20px 48px rgba(0,0,0,.30),
+    0 0 32px rgba(128,242,190,.095),
+    inset 0 0 36px rgba(128,242,190,.02);
+}
+
+.case-tool-card:hover,
+.case-tool-card:focus-visible,
+.case-tool-card:active {
+  transform: translateY(-3px);
+  border-color: rgba(128,242,190,.46);
+  background: linear-gradient(155deg, rgba(18,31,28,.84), rgba(8,11,16,.68));
+  box-shadow:
+    0 22px 52px rgba(0,0,0,.30),
+    0 0 34px rgba(128,242,190,.09),
+    inset 0 0 38px rgba(128,242,190,.02);
+}
+
+/* Method cards echo the About cards without competing with linked evidence. */
+.case-method-grid article:hover,
+.case-method-grid article:active {
+  transform: translateY(-3px);
+  border-color: rgba(128,242,190,.38);
+  background: linear-gradient(155deg, rgba(18,30,27,.74), rgba(10,14,19,.62));
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.25),
+    0 0 26px rgba(128,242,190,.07),
+    inset 0 0 32px rgba(128,242,190,.02);
+}
+
+/* Calls to action get a restrained halo rather than another card-sized effect. */
+.button.primary:hover,
+.button.primary:focus-visible,
+.button.primary:active {
+  box-shadow: 0 10px 28px rgba(128,242,190,.20), 0 0 22px rgba(128,242,190,.13);
+}
+
+.button.secondary:hover,
+.button.secondary:focus-visible,
+.button.secondary:active {
+  border-color: rgba(128,242,190,.34);
+  background: rgba(128,242,190,.055);
+  box-shadow: 0 10px 26px rgba(0,0,0,.22), 0 0 18px rgba(128,242,190,.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .case-stat,
+  .case-pr-card,
+  .case-tool-card,
+  .case-method-grid article,
+  .button {
+    transition: none;
+  }
+}
