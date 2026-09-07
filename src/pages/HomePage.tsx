@@ -21,7 +21,7 @@ export function HomePage() {
       <section className="hero shell" aria-labelledby="hero-title">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <div className="status-pill"><span /> DrecSec v0.2 — community foundation</div>
+          <div className="status-pill"><span /> DrecSec v0.2 — backend connected</div>
           <p className="hero-kicker">CYBERSECURITY • OPEN SOURCE • CTF</p>
           <h1 id="hero-title">
             Learn the system.<br />
@@ -110,7 +110,7 @@ export function HomePage() {
             <span className="kicker">04 / Community</span>
             <h2>DrecSec grows beyond one profile.</h2>
             <p>Accounts, member profiles, moderated discussions and real-time rooms are being built on the same foundation — without turning the site into an anonymous chaos pit.</p>
-            <div className="roadmap-pills"><span>Auth wiring</span><span>Profiles wiring</span><span>Community beta</span><span>Live chat beta</span></div>
+            <div className="roadmap-pills"><span>Auth backend connected</span><span>Profiles beta</span><span>Community beta</span><span>Live chat beta</span></div>
             <div className="community-actions"><Link className="button primary" to="/community">Open community</Link><Link className="button secondary" to="/account">Create account</Link></div>
           </div>
           <div className="channel-window" aria-label="Channel preview">
