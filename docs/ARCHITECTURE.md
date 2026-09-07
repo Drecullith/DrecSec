@@ -1,50 +1,44 @@
 # DrecSec Architecture
 
-## Phase 1 — v0.1
-
-A React + TypeScript + Vite frontend deployable as a static site.
+## v0.2 — portfolio + community foundation
 
 ```text
 Browser
-  └─ DrecSec React app
-      ├─ portfolio
-      ├─ project showcase
-      ├─ learning roadmap
-      └─ community preview
+  └─ React + TypeScript + Vite
+      ├─ public portfolio
+      ├─ account UI
+      ├─ member profiles
+      ├─ community feed
+      └─ live channel UI
+             │
+             ▼
+        Supabase client
+      ┌──────┼─────────┐
+      │      │         │
+     Auth PostgreSQL Realtime
+             │
+             └─ Row Level Security
 ```
 
-There is deliberately no fake backend in v0.1.
+## Trust boundaries
 
-## Phase 2 — accounts and data
+The browser is untrusted. It may hold only public/publishable configuration.
 
-```text
-Browser
-  ├─ DrecSec React app
-  └─ Supabase client
-       ├─ Auth
-       ├─ PostgreSQL
-       └─ Realtime
-```
+Authorization is enforced in PostgreSQL with RLS, not by hiding buttons in React. Authenticated clients may create posts/messages only where `author_id = auth.uid()`. Members may update only their own profile and cannot update the `role` column through normal client privileges.
 
-All user-owned data will use Row Level Security. Public browser keys are not authorization boundaries; database policies are.
+A Supabase service-role key is privileged and must never be committed or exposed through Vite environment variables.
 
-## Phase 3 — privileged server operations
+## Hosting
 
-```text
-Browser
-  ├─ Supabase (user-scoped data)
-  └─ Cloudflare Worker API
-       ├─ privileged moderation actions
-       ├─ integration/webhook validation
-       ├─ server-only secrets
-       └─ abuse/rate-limit controls
-```
+Vercel serves the Vite production build. `vercel.json` provides SPA routing and browser security headers. GitHub Actions performs dependency installation, TypeScript checking and a production build on pushes and pull requests.
 
-## Design principles
+## Data model
 
-1. **Least privilege** — clients receive only the capabilities they require.
-2. **Permission first** — offensive-security features live in authorized contexts.
-3. **No secret-by-obscurity** — secrets never ship in frontend bundles.
-4. **Auditability** — moderation and privileged changes should leave useful records.
-5. **Progressive complexity** — add infrastructure only when the product needs it.
-6. **Portable identity** — Drecullith is the author identity; DrecSec is the platform/project identity.
+- `profiles` — one public profile per auth user
+- `posts` — long-form community feed entries
+- `channels` — controlled list of real-time rooms
+- `messages` — channel messages, published through Supabase Realtime
+
+## Next security work
+
+Before opening the community broadly, DrecSec still needs abuse controls, moderation/reporting, account deletion/export, rate limiting, backup/restore testing, and a review of account recovery and email confirmation flows.

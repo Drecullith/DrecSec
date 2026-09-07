@@ -1,61 +1,82 @@
 # DrecSec
 
-**Cybersecurity • Open Source • CTF**
+**Cybersecurity • Open Source • CTF • Community**
 
 DrecSec is the public cybersecurity portfolio and community project of **Drecullith**.
 
-The first release is intentionally honest: it documents active learning, real projects and open-source work instead of presenting an invented expert persona. The architecture is designed to grow into authenticated profiles, moderated discussions, real-time chat and CTF/write-up tooling.
+The project stays deliberately evidence-first: real projects, open-source work, ethical labs, CTF methodology, write-ups, and a visible learning path instead of an invented expert persona.
 
-## v0.1 scope
+## Current scope — v0.2
 
-- Responsive portfolio landing page
-- Drecullith identity and current focus
-- Projects: DrecSec, Lychnos, Omarchy contributions, future CTF notes
-- Public learning roadmap
-- Community roadmap preview
-- Accessibility basics and reduced-motion support
-- Cloudflare-friendly Vite production build
-- Environment-variable placeholders for the Supabase phase
+- Responsive public portfolio
+- Drecullith identity and project showcase
+- Email/password authentication UI backed by Supabase Auth
+- Public member profiles with self-service editing
+- Member directory
+- Authenticated community posts
+- Real-time channel chat plumbing with Supabase Realtime
+- PostgreSQL Row Level Security migration
+- Vercel security headers and SPA routing
+- GitHub Actions typecheck + production build
+- Graceful backend-offline state until Supabase is connected
 
 ## Stack
 
-- React
+- React 19
 - TypeScript
 - Vite
-- Plain CSS design system (no UI-framework lock-in)
-
-Planned platform services:
-
-- Cloudflare for hosting/edge API
-- Supabase for PostgreSQL, authentication and real-time features
+- React Router
+- Supabase Auth / PostgreSQL / Realtime
+- Vercel production deployment
+- Plain CSS design system
 
 ## Local development
 
 ```bash
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
-Then open the local URL printed by Vite.
+Without Supabase environment variables, the public portfolio still works and community/auth pages show an explicit backend-pending state.
+
+## Supabase
+
+Apply:
+
+```text
+supabase/migrations/20260907_001_community_foundation.sql
+```
+
+Then configure:
+
+```text
+VITE_SUPABASE_URL=<project URL>
+VITE_SUPABASE_PUBLISHABLE_KEY=<publishable key>
+```
+
+Never place a service-role/secret key in a `VITE_*` variable.
+
+See [docs/COMMUNITY.md](./docs/COMMUNITY.md).
 
 ## Production build
 
 ```bash
+npm run typecheck
 npm run build
 npm run preview
 ```
 
 ## Roadmap
 
-- **v0.2** — Supabase project, secure authentication, account verification
-- **v0.3** — Member profiles and role model
-- **v0.4** — Posts, discussions, moderation primitives
-- **v0.5** — Real-time channels, presence, rate limits
-- **v0.6** — CTF/write-up system, achievements and GitHub integration
-- **v1.0** — Security review, production hardening and public community launch
+- **v0.2** — Auth + profile + community foundation
+- **v0.3** — Moderation primitives, profile polish, rate-limit strategy
+- **v0.4** — Real-time presence, mentions, unread state, message controls
+- **v0.5** — CTF/write-up system and GitHub integrations
+- **v1.0** — Security review, abuse handling, backup/restore, accessibility audit, public launch
 
 ## Security
 
-DrecSec is a defensive/ethical-learning project. Security testing content should target systems the tester owns or has explicit authorization to assess, intentionally vulnerable labs, or CTF environments.
+DrecSec is for defensive and permission-based security learning. Content should target systems the tester owns, intentionally vulnerable labs, CTF environments, or systems with explicit authorization.
 
 See [SECURITY.md](./SECURITY.md).
