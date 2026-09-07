@@ -1,36 +1,30 @@
 # Security Policy
 
-DrecSec is being built with a security-first release process.
+DrecSec v0.4 is a static, public cybersecurity portfolio. The production site has no visitor authentication, account creation, database, uploads, contact form, community posting, or realtime backend.
 
-## Current status
+## Current security model
 
-Version 0.2 introduces the code and database migration for accounts, profiles, posts and real-time messages. User-data features must not be considered production-ready until the Supabase project is configured, the migration is applied, email confirmation is verified, and abuse/rate-limit controls are reviewed.
+The main control is architectural: keep the public site small and avoid collecting credentials or user data unless a future feature genuinely requires server-side state.
 
-## Current controls
+Current controls include:
 
-- PostgreSQL Row Level Security on every community table
-- Authenticated writes bound to `auth.uid()`
-- Public/publishable browser key only; no service-role key in client code
-- Privileged profile roles excluded from member-editable columns
-- Database length/format checks for usernames and content
-- Content Security Policy and hardened Vercel headers
-- GitHub Actions typecheck and production build
-- No anonymous community writes
+- HTTPS-only deployment on Vercel with explicit HSTS.
+- A restrictive Content Security Policy with no `unsafe-inline` or `unsafe-eval` allowances.
+- Frames, objects, forms, workers, media, and browser network connections disabled where the current site does not need them.
+- `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, restrictive permissions policy, and cross-origin isolation headers.
+- No `dangerouslySetInnerHTML`, `eval`, `new Function`, `document.write`, or direct `innerHTML` assignment in application source.
+- GitHub Actions runs with read-only repository permission; third-party actions are pinned to exact commit SHAs.
+- CI audits all npm dependencies for high-severity vulnerabilities, runs a dedicated security configuration check, typechecks, and builds production output.
+- Direct npm dependency versions are pinned exactly rather than using version ranges.
 
-## Before broad public community launch
+## Reporting a vulnerability
 
-The following remain release gates:
+Please do not publish exploitable details for a live DrecSec deployment in a public issue.
 
-- Rate limiting and anti-spam/anti-bot controls
-- Reporting, block/mute, moderation and audit trail
-- Moderator/admin workflows implemented server-side
-- Account deletion and data export
-- Backup/restore testing
-- Dependency/security scanning
-- Session/account recovery review
-- File upload restrictions if uploads are introduced
-- Private responsible-disclosure channel
+For a non-sensitive bug, use the GitHub repository issue tracker. For a security issue that needs private handling, contact Drecullith through the GitHub profile with a minimal description and request a private channel before sharing proof-of-concept details.
 
-## Responsible disclosure
+## Scope boundary
 
-A private security-reporting channel will be documented before v1.0. Until then, do not publish exploitable details about a live DrecSec deployment.
+DrecSec documents defensive and permission-based security learning. Testing content should target systems the tester owns, intentionally vulnerable labs, CTF environments, or systems with explicit authorization.
+
+The current production site intentionally does not collect visitor credentials or sensitive personal data.
