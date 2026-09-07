@@ -58,6 +58,7 @@ export function HomePage() {
     "ethical hacking",
     "CTF methodology"
   ],
+  "deployment": "GitHub → Vercel",
   "principle": "permission first",
   "status": "learning in public"
 }`}</pre>
