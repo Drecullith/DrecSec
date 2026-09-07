@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
 import { Mark } from './Mark'
-import { useAuth } from '../context/AuthContext'
 
 export function Header() {
   const [open, setOpen] = useState(false)
-  const { user, signOut } = useAuth()
 
   function close() {
     setOpen(false)
@@ -14,26 +11,18 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="shell header-inner">
-        <Link to="/" className="brand" aria-label="DrecSec home" onClick={close}>
+        <a href="/" className="brand" aria-label="DrecSec home" onClick={close}>
           <Mark />
           <span><strong>DRECSEC</strong><small>by Drecullith</small></span>
-        </Link>
+        </a>
 
         <button className="menu-button" type="button" aria-label="Toggle navigation" aria-expanded={open} onClick={() => setOpen((value) => !value)}><span /><span /></button>
 
         <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
-          <Link to="/#about" onClick={close}>About</Link>
-          <Link to="/#projects" onClick={close}>Projects</Link>
-          <NavLink to="/community" onClick={close}>Community</NavLink>
-          <NavLink to="/chat" onClick={close}>Live chat</NavLink>
-          {user ? (
-            <>
-              <NavLink to="/profile" onClick={close}>Profile</NavLink>
-              <button className="nav-button" type="button" onClick={() => { close(); void signOut() }}>Sign out</button>
-            </>
-          ) : (
-            <NavLink className="nav-cta" to="/account" onClick={close}>Sign in</NavLink>
-          )}
+          <a href="#about" onClick={close}>About</a>
+          <a href="#projects" onClick={close}>Projects</a>
+          <a href="#journey" onClick={close}>Journey</a>
+          <a href="https://github.com/Drecullith" target="_blank" rel="noreferrer" onClick={close}>GitHub ↗</a>
         </nav>
       </div>
     </header>

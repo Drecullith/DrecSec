@@ -1,52 +1,44 @@
 # DrecSec Roadmap
 
-DrecSec is being built in small, reviewable releases so the public portfolio stays useful while the community platform grows behind it.
+DrecSec is being built in small, reviewable releases with the portfolio itself as the product.
 
 ## v0.1 — Portfolio foundation
 
 - Responsive public portfolio
 - Drecullith identity and project showcase
-- Learning journey and community preview
+- Learning journey
 - Security policy, architecture notes, and CI
-- Cloudflare-ready static build
 
-## v0.2 — Authentication
+## v0.2 — Portfolio-only production
 
-- Supabase project
-- Sign-up, sign-in, sign-out, and verified email flow
-- Secure session handling
-- Initial Row Level Security policies
+- GitHub → Vercel deployment pipeline
+- Security headers
+- Remove account creation, authentication, member profiles, community posting, and live chat
+- Remove Supabase runtime dependency
+- Keep the public site credential-free
 
-## v0.3 — Member profiles
+## v0.3 — Project depth
 
-- Public member profiles
-- Roles and permissions
-- GitHub/profile links
-- Privacy controls
+- Individual project detail pages
+- Screenshots, architecture notes, milestones, and lessons learned
+- Better linking to source code and releases
 
-## v0.4 — Discussions
+## v0.4 — Verified activity
 
-- Posts, comments, categories, and moderation primitives
-- Reporting and abuse controls
-- Audit-friendly privileged actions
+- GitHub contribution and project activity integrations
+- Open-source contribution history
+- Clear links from portfolio claims to evidence
 
-## v0.5 — Live community
-
-- Real-time channels
-- Presence
-- Rate limits and anti-spam controls
-- Moderator tooling
-
-## v0.6 — CTF and write-ups
+## v0.5 — CTF and write-ups
 
 - Ethical-lab and CTF write-up system
-- Progress and achievement model
-- GitHub integrations
+- Sanitized methodology notes
+- Defensive takeaways and learning logs
 
-## v1.0 — Public community release
+## v1.0 — Portfolio release
 
 - Security review
-- Production hardening
-- Backup and recovery plan
-- Responsible disclosure channel
-- Documentation and contributor onboarding
+- Accessibility audit
+- Performance pass
+- Content polish
+- Documentation and contributor guidance

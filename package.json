@@ -10,10 +10,8 @@
     "typecheck": "tsc -b --pretty false"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.57.4",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "react-router-dom": "^6.30.1"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",

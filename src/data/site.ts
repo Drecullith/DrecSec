@@ -1,16 +1,9 @@
-export const navigation = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Journey', href: '#journey' },
-  { label: 'Community', href: '#community' },
-]
-
 export const projects = [
   {
     eyebrow: 'Platform',
     title: 'DrecSec',
     description:
-      'The site you are looking at: a public cybersecurity portfolio designed to grow into a community for ethical hacking, CTFs, open-source work, and learning in public.',
+      'The site you are looking at: a public cybersecurity portfolio for ethical hacking, CTFs, open-source work, write-ups, and learning in public.',
     status: 'Building now',
     tags: ['React', 'TypeScript', 'Security by design'],
   },
@@ -53,9 +46,7 @@ export const journey = [
   },
   {
     label: 'Then',
-    title: 'Community',
-    body: 'Open DrecSec to member profiles, discussions, live rooms, project showcases, collaborative learning, and sensible moderation.',
+    title: 'Deepen the evidence',
+    body: 'Connect project releases, contribution history, technical write-ups, and lab notes so every claim on DrecSec points back to demonstrable work.',
   },
 ]
-
-export const channels = ['general', 'ctf-help', 'linux', 'web-security', 'open-source', 'homelab']
