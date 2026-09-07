@@ -1,0 +1,34 @@
+name: Production security check
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '47 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-security-check
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 22
+
+      - name: Verify production TLS and security headers
+        env:
+          PRODUCTION_URL: https://drecsec-portfolio.vercel.app
+        run: node scripts/check-production-security.mjs

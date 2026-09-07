@@ -1,0 +1,61 @@
+name: Portfolio sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/portfolio-sync.yml'
+      - 'scripts/sync-omarchy.mjs'
+      - 'scripts/check-production-security.mjs'
+      - 'src/data/omarchy.generated.ts'
+      - 'package.json'
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
+        with:
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 22
+
+      - name: Create or refresh lockfile when required
+        if: github.event_name == 'push' || hashFiles('package-lock.json') == ''
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Sync public Omarchy PR evidence
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/sync-omarchy.mjs
+
+      - name: Commit generated evidence if changed
+        run: |
+          git add package-lock.json src/data/omarchy.generated.ts
+          if git diff --cached --quiet; then
+            echo 'No generated changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: sync public portfolio evidence'
+          git push
+
+      - name: Verify production security headers
+        env:
+          PRODUCTION_URL: https://drecsec-portfolio.vercel.app
+        run: node scripts/check-production-security.mjs

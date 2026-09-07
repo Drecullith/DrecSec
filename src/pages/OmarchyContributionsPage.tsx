@@ -1,62 +1,15 @@
 import { useEffect } from 'react'
 import { SectionHeading } from '../components/SectionHeading'
+import { omarchyPullRequests } from '../data/omarchy.generated'
 
-const pullRequests = [
-  {
-    number: 10623,
-    date: '7 Sep 2026',
-    title: 'Fix explicit bar toggle direction',
-    summary: 'Corrects the public on/off semantics for the bar while preserving the underlying negated bar-off state flag and normal toggle behavior.',
-    test: 'test/shell.d/toggle-test.sh',
-    issue: '#10621',
-    href: 'https://github.com/omacom/omarchy/pull/10623',
-  },
-  {
-    number: 10535,
-    date: '6 Sep 2026',
-    title: 'Use Ctrl+V for clipboard image paste',
-    summary: 'Keeps terminal text paste behavior unchanged while letting image-aware applications receive staged image clipboard data correctly.',
-    test: 'test/shell.d/clipboard-file-paste-test.sh',
-    issue: '#10526',
-    href: 'https://github.com/omacom/omarchy/pull/10535',
-  },
-  {
-    number: 10513,
-    date: '6 Sep 2026',
-    title: 'Drop browser codec preloads from yt-dlp host',
-    summary: 'Prevents browser-specific codec preload variables from leaking into yt-dlp, ffmpeg, and other helpers spawned by the Chromium native messaging host.',
-    test: 'test/shell.d/chromium-ytdlp-preload-test.sh',
-    issue: '#10469',
-    href: 'https://github.com/omacom/omarchy/pull/10513',
-  },
-  {
-    number: 10501,
-    date: '6 Sep 2026',
-    title: 'Keep Bluetooth device actions on the panel adapter',
-    summary: 'Keeps discovery, pairing, connecting, and forgetting on the same Bluetooth controller on multi-adapter systems.',
-    test: 'test/shell.d/bluetooth-multi-adapter-test.sh',
-    issue: '#10479',
-    href: 'https://github.com/omacom/omarchy/pull/10501',
-  },
-  {
-    number: 10497,
-    date: '6 Sep 2026',
-    title: 'Restore GVfs mounts after system resume',
-    summary: 'Moves delayed GVfs recovery into a transient systemd unit so the recovery survives sleep-hook cgroup teardown after resume.',
-    test: 'test/shell.d/unmount-fuse-test.sh',
-    issue: '#10450',
-    href: 'https://github.com/omacom/omarchy/pull/10497',
-  },
-  {
-    number: 10490,
-    date: '6 Sep 2026',
-    title: 'Scope 1Password floating geometry to main window',
-    summary: 'Separates class-wide privacy protection from generic floating geometry so fixed-size browser unlock popups are not forced into main-window dimensions.',
-    test: 'test/shell.d/hyprland-1password-rules-test.sh',
-    issue: '#9904',
-    href: 'https://github.com/omacom/omarchy/pull/10490',
-  },
-]
+const summaries: Record<number, string> = {
+  10623: 'Corrects the public on/off semantics for the bar while preserving the underlying negated bar-off state flag and normal toggle behavior.',
+  10535: 'Keeps terminal text paste behavior unchanged while letting image-aware applications receive staged image clipboard data correctly.',
+  10513: 'Prevents browser-specific codec preload variables from leaking into yt-dlp, ffmpeg, and other helpers spawned by the Chromium native messaging host.',
+  10501: 'Keeps discovery, pairing, connecting, and forgetting on the same Bluetooth controller on multi-adapter systems.',
+  10497: 'Moves delayed GVfs recovery into a transient systemd unit so the recovery survives sleep-hook cgroup teardown after resume.',
+  10490: 'Separates class-wide privacy protection from generic floating geometry so fixed-size browser unlock popups are not forced into main-window dimensions.',
+}
 
 const tools = [
   {
@@ -77,10 +30,16 @@ const tools = [
   },
 ]
 
+function formatDate(value: string) {
+  return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(value))
+}
+
 export function OmarchyContributionsPage() {
   useEffect(() => {
     document.title = 'Omarchy Contributions — DrecSec'
   }, [])
+
+  const testedFixes = omarchyPullRequests.filter((pr) => pr.test).length
 
   return (
     <main className="case-study">
@@ -96,9 +55,9 @@ export function OmarchyContributionsPage() {
           <a className="button secondary" href="#upstream">See upstream PRs ↓</a>
         </div>
         <div className="case-stat-grid" aria-label="Contribution snapshot">
-          <div className="case-stat"><strong>6</strong><span>upstream PRs submitted</span></div>
-          <div className="case-stat"><strong>2</strong><span>finished public utilities</span></div>
-          <div className="case-stat"><strong>6</strong><span>regression-tested fixes</span></div>
+          <div className="case-stat"><strong>{omarchyPullRequests.length}</strong><span>upstream PRs submitted</span></div>
+          <div className="case-stat"><strong>{tools.length}</strong><span>finished public utilities</span></div>
+          <div className="case-stat"><strong>{testedFixes}</strong><span>regression-tested fixes</span></div>
         </div>
       </section>
 
@@ -106,16 +65,20 @@ export function OmarchyContributionsPage() {
         <SectionHeading
           kicker="01 / Upstream"
           title="Real issues. Focused fixes."
-          body="Each pull request starts from a concrete reported failure and includes a regression test aimed at the behavior being changed. The links below go straight to the upstream review record."
+          body="This list is generated from public GitHub metadata for Drecullith's upstream Omarchy pull requests. Curated summaries stay deliberately manual so the portfolio does not invent claims that are not backed by review evidence."
         />
         <div className="case-pr-list">
-          {pullRequests.map((pr) => (
+          {omarchyPullRequests.map((pr) => (
             <a className="case-pr-card" href={pr.href} target="_blank" rel="noreferrer" key={pr.number}>
-              <div className="case-pr-id"><strong>PR #{pr.number}</strong><span>{pr.date}</span></div>
+              <div className="case-pr-id"><strong>PR #{pr.number}</strong><span>{formatDate(pr.createdAt)}</span></div>
               <div className="case-pr-copy">
                 <h3>{pr.title}</h3>
-                <p>{pr.summary}</p>
-                <div className="case-pr-meta"><span>Issue {pr.issue}</span><code>{pr.test}</code></div>
+                <p>{summaries[pr.number] ?? 'Public upstream contribution by Drecullith. Open the review trail for the issue context, diff, tests, and maintainer discussion.'}</p>
+                <div className="case-pr-meta">
+                  <span>{pr.state.toUpperCase()}</span>
+                  {pr.issue ? <span>Issue {pr.issue}</span> : null}
+                  {pr.test ? <code>{pr.test}</code> : null}
+                </div>
               </div>
               <span className="case-pr-arrow" aria-hidden="true">↗</span>
             </a>
