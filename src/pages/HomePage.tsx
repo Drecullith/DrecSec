@@ -20,7 +20,7 @@ export function HomePage() {
       <section className="hero shell" aria-labelledby="hero-title">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <div className="status-pill"><span /> DrecSec v0.3 — portfolio reboot</div>
+          <div className="status-pill"><span /> DrecSec v0.3 — building in public</div>
           <p className="hero-kicker">CYBERSECURITY • OPEN SOURCE • CTF</p>
           <h1 id="hero-title">
             Learn the system.<br />
@@ -105,7 +105,7 @@ export function HomePage() {
       </section>
 
       <section className="section shell final-cta">
-        <div><span className="kicker">04 / FOLLOW THE WORK</span><h2>No account required.</h2><p className="hero-lede">DrecSec is intentionally public and portfolio-first. Follow the code, contributions, labs, and write-ups directly.</p></div>
+        <div><span className="kicker">04 / FOLLOW THE WORK</span><h2>Follow the work.</h2><p className="hero-lede">Projects, contributions, labs, and write-ups stay connected to the work itself — so the evidence is always one click away.</p></div>
         <a className="button primary" href="https://github.com/Drecullith" target="_blank" rel="noreferrer">Follow Drecullith on GitHub ↗</a>
       </section>
     </main>
