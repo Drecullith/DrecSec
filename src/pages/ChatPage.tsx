@@ -48,10 +48,11 @@ export function ChatPage() {
   }, [configured])
 
   useEffect(() => {
-    if (!supabase || !active) return
+    const client = supabase
+    if (!client || !active) return
     void loadMessages(active.id)
 
-    const subscription = supabase
+    const subscription = client
       .channel(`drecsec:${active.id}`)
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `channel_id=eq.${active.id}` }, () => {
         void loadMessages(active.id)
@@ -59,7 +60,7 @@ export function ChatPage() {
       .subscribe()
 
     return () => {
-      void supabase.removeChannel(subscription)
+      void client.removeChannel(subscription)
     }
   }, [active, loadMessages])
 
