@@ -20,7 +20,7 @@ export function HomePage() {
       <section className="hero shell" aria-labelledby="hero-title">
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy">
-          <div className="status-pill"><span /> DrecSec v0.2 — portfolio mode</div>
+          <div className="status-pill"><span /> DrecSec v0.3 — portfolio reboot</div>
           <p className="hero-kicker">CYBERSECURITY • OPEN SOURCE • CTF</p>
           <h1 id="hero-title">
             Learn the system.<br />
