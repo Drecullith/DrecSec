@@ -14,11 +14,21 @@ export type OmarchyPullRequest = {
 
 export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
+    "number": 10742,
+    "title": "Warn about orphaned legacy Hyprland config",
+    "state": "open",
+    "createdAt": "2026-09-07T23:42:45Z",
+    "updatedAt": "2026-09-07T23:42:46Z",
+    "href": "https://github.com/omacom/omarchy/pull/10742",
+    "issue": "#6933",
+    "test": "test/shell.d/upgrade-to-quattro-legacy-hypr-config-test.sh"
+  },
+  {
     "number": 10623,
     "title": "Fix explicit bar toggle direction",
     "state": "open",
     "createdAt": "2026-09-07T09:58:38Z",
-    "updatedAt": "2026-09-07T09:58:39Z",
+    "updatedAt": "2026-09-07T19:23:50Z",
     "href": "https://github.com/omacom/omarchy/pull/10623",
     "issue": "#10621",
     "test": null
