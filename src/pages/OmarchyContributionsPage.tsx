@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { SectionHeading } from '../components/SectionHeading'
-import { omarchyPullRequests } from '../data/omarchy.generated'
+import { omarchyPullRequests, omarchyTools } from '../data/omarchy.generated'
 
 const details: Record<number, { summary: string; issue?: string; test?: string }> = {
   10623: {
@@ -35,24 +35,33 @@ const details: Record<number, { summary: string; issue?: string; test?: string }
   },
 }
 
-const tools = [
-  {
-    name: 'Omarchy Plugin Rescue',
-    version: 'v1.0.0',
+type ToolPresentation = {
+  description: string
+  points: string[]
+  command?: string
+}
+
+const toolDetails: Record<string, ToolPresentation> = {
+  'contrib:plugin-rescue': {
     command: 'omrescue',
     description: 'A TTY-safe recovery utility that temporarily removes only third-party shell-plugin references from shell.json, preserves unrelated configuration, and can restore the exact original file afterward.',
     points: ['No sudo or daemon', 'Atomic config replacement', 'Byte-for-byte restore snapshot', 'Never executes plugin code'],
-    href: 'https://github.com/Drecullith/Omarchy-Contributions/tree/main/tools/plugin-rescue',
   },
-  {
-    name: 'Omarchy Rollback Check',
-    version: 'v1.0.0',
+  'contrib:rollback-check': {
     command: 'omrollback-check',
     description: 'A read-only diagnostic for root/home migration-ledger drift after a root snapshot restore, with conservative CONFIRMED and POTENTIAL evidence classes.',
     points: ['Read-only by design', 'No migration replay', 'No snapshot changes', 'No network or telemetry'],
-    href: 'https://github.com/Drecullith/Omarchy-Contributions/tree/main/tools/rollback-check',
   },
-]
+  'contrib:migration-check': {
+    command: 'ommigration-check',
+    description: 'A read-only Quattro audit for legacy Hyprland .conf files that can survive the 3.x to Lua migration even though the active configuration has moved on.',
+    points: ['Read-only audit', 'No config conversion', 'No deletion or sourcing', 'Conservative result states'],
+  },
+  'repo:omarchy-scope': {
+    description: 'An Omarchy Quattro engagement HUD for ethical hackers and CTF players that keeps authorization scope, current targets, imported evidence, quarantine, and route changes visible without becoming a scanner or exploitation framework.',
+    points: ['27 automated tests', 'No root or daemon', 'No automatic scanning', 'Real Quattro validation pending'],
+  },
+}
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(value))
@@ -66,12 +75,27 @@ function effectiveTest(number: number, generated: string | null) {
   return generated ?? details[number]?.test ?? null
 }
 
+function stageLabel(stage: 'released' | 'build-candidate' | 'public') {
+  if (stage === 'build-candidate') return 'build candidate'
+  if (stage === 'released') return 'released'
+  return 'public'
+}
+
 export function OmarchyContributionsPage() {
   useEffect(() => {
     document.title = 'Omarchy Contributions — DrecSec'
   }, [])
 
   const testedFixes = omarchyPullRequests.filter((pr) => effectiveTest(pr.number, pr.test)).length
+  const tools = omarchyTools.map((tool) => {
+    const presentation = toolDetails[tool.id]
+    return {
+      ...tool,
+      command: presentation?.command ?? null,
+      description: presentation?.description ?? 'Public Omarchy work discovered from an explicitly approved source. Open the repository for the current scope, implementation, and release status.',
+      points: presentation?.points ?? ['Public source', 'Automatically discovered'],
+    }
+  })
 
   return (
     <main className="case-study">
@@ -80,7 +104,7 @@ export function OmarchyContributionsPage() {
         <span className="kicker">OPEN SOURCE / OMARCHY</span>
         <h1 id="case-title">Omarchy<br /><em>Contributions.</em></h1>
         <p className="case-lede">
-          A traceable record of small upstream fixes, regression tests, and finished utilities built around real Omarchy problems. The goal is simple: understand the failure, make the smallest defensible change, and leave evidence behind.
+          A traceable record of small upstream fixes, regression tests, and public Omarchy tools built around real problems. The goal is simple: understand the failure, make the smallest defensible change, and leave evidence behind.
         </p>
         <div className="case-actions">
           <a className="button primary" href="https://github.com/Drecullith/Omarchy-Contributions" target="_blank" rel="noreferrer">Contribution repo ↗</a>
@@ -88,7 +112,7 @@ export function OmarchyContributionsPage() {
         </div>
         <div className="case-stat-grid" aria-label="Contribution snapshot">
           <div className="case-stat"><strong>{omarchyPullRequests.length}</strong><span>upstream PRs submitted</span></div>
-          <div className="case-stat"><strong>{tools.length}</strong><span>finished public utilities</span></div>
+          <div className="case-stat"><strong>{tools.length}</strong><span>public tools & plugin projects</span></div>
           <div className="case-stat"><strong>{testedFixes}</strong><span>regression-tested fixes</span></div>
         </div>
       </section>
@@ -126,16 +150,16 @@ export function OmarchyContributionsPage() {
 
       <section className="section shell case-section">
         <SectionHeading
-          kicker="02 / Finished tools"
+          kicker="02 / Tools & plugins"
           title="Small tools with hard boundaries."
-          body="The companion repository follows a strict rule: research first, define a finish line, build it, test it, ship it. These two utilities are intentionally narrow rather than growing into vague repair suites."
+          body="Tool discovery is synced only from explicitly approved public sources. Released utilities stay clearly separated from build candidates such as SCOPE, so the portfolio can update automatically without pretending unfinished validation is complete."
         />
         <div className="case-tool-grid">
           {tools.map((tool) => (
-            <a className="case-tool-card" href={tool.href} target="_blank" rel="noreferrer" key={tool.name}>
-              <div className="case-tool-top"><span>{tool.version}</span><span>View source ↗</span></div>
+            <a className="case-tool-card" href={tool.href} target="_blank" rel="noreferrer" key={tool.id}>
+              <div className="case-tool-top"><span>{tool.version ?? 'Public'} · {stageLabel(tool.stage)}</span><span>View source ↗</span></div>
               <h3>{tool.name}</h3>
-              <code className="case-command">$ {tool.command}</code>
+              {tool.command ? <code className="case-command">$ {tool.command}</code> : null}
               <p>{tool.description}</p>
               <div className="case-tool-points">{tool.points.map((point) => <span key={point}>{point}</span>)}</div>
             </a>
