@@ -23,6 +23,96 @@ export type OmarchyTool = {
 
 export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
+    "number": 10905,
+    "title": "Validate GNOME icon themes before applying",
+    "state": "open",
+    "createdAt": "2026-09-08T23:49:05Z",
+    "updatedAt": "2026-09-08T23:49:05Z",
+    "href": "https://github.com/omacom/omarchy/pull/10905",
+    "issue": "#7203",
+    "test": "test/shell.d/gnome-icon-theme-test.sh"
+  },
+  {
+    "number": 10899,
+    "title": "Bound running browser policy refreshes",
+    "state": "open",
+    "createdAt": "2026-09-08T23:18:02Z",
+    "updatedAt": "2026-09-08T23:18:03Z",
+    "href": "https://github.com/omacom/omarchy/pull/10899",
+    "issue": "#10636",
+    "test": "test/shell.d/theme-browser-refresh-test.sh"
+  },
+  {
+    "number": 10890,
+    "title": "Classify T2 built-in trackpads as internal",
+    "state": "open",
+    "createdAt": "2026-09-08T22:27:50Z",
+    "updatedAt": "2026-09-08T22:27:51Z",
+    "href": "https://github.com/omacom/omarchy/pull/10890",
+    "issue": "#10815",
+    "test": "test/shell.d/t2-trackpad-test.sh"
+  },
+  {
+    "number": 10886,
+    "title": "Repair T1 Mac PCIe hotplug defaults",
+    "state": "open",
+    "createdAt": "2026-09-08T22:07:25Z",
+    "updatedAt": "2026-09-08T22:07:25Z",
+    "href": "https://github.com/omacom/omarchy/pull/10886",
+    "issue": "#10638",
+    "test": "test/shell.d/t1-pcie-hotplug-test.sh"
+  },
+  {
+    "number": 10878,
+    "title": "Converge ISO Node pins on normal updates",
+    "state": "open",
+    "createdAt": "2026-09-08T21:09:09Z",
+    "updatedAt": "2026-09-08T21:09:09Z",
+    "href": "https://github.com/omacom/omarchy/pull/10878",
+    "issue": "#10820",
+    "test": "test/shell.d/update-mise-test.sh"
+  },
+  {
+    "number": 10877,
+    "title": "Target the actual NVMe controller in Apple suspend fix",
+    "state": "open",
+    "createdAt": "2026-09-08T21:00:30Z",
+    "updatedAt": "2026-09-08T21:00:31Z",
+    "href": "https://github.com/omacom/omarchy/pull/10877",
+    "issue": "#10826",
+    "test": "test/shell.d/apple-nvme-suspend-test.sh"
+  },
+  {
+    "number": 10872,
+    "title": "Limit terminal cwd inheritance to terminal windows",
+    "state": "open",
+    "createdAt": "2026-09-08T20:45:31Z",
+    "updatedAt": "2026-09-08T20:45:32Z",
+    "href": "https://github.com/omacom/omarchy/pull/10872",
+    "issue": "#10840",
+    "test": "test/shell.d/terminal-cwd-test.sh"
+  },
+  {
+    "number": 10869,
+    "title": "Prevent lock-screen wake loop during idle transition",
+    "state": "open",
+    "createdAt": "2026-09-08T20:36:12Z",
+    "updatedAt": "2026-09-08T20:36:13Z",
+    "href": "https://github.com/omacom/omarchy/pull/10869",
+    "issue": "#10861",
+    "test": "test/shell.d/idle-test.sh"
+  },
+  {
+    "number": 10866,
+    "title": "Clarify theme-scoped and global settings",
+    "state": "open",
+    "createdAt": "2026-09-08T20:21:10Z",
+    "updatedAt": "2026-09-08T20:37:14Z",
+    "href": "https://github.com/omacom/omarchy/pull/10866",
+    "issue": "#10853",
+    "test": null
+  },
+  {
     "number": 10742,
     "title": "Warn about orphaned legacy Hyprland config",
     "state": "open",
@@ -122,7 +212,7 @@ export const omarchyTools: OmarchyTool[] = [
   {
     "id": "repo:omarchy-scope",
     "name": "SCOPE",
-    "version": "v0.1.0",
+    "version": "v10.10.11",
     "stage": "build-candidate",
     "href": "https://github.com/Drecullith/omarchy-scope",
     "sourceRepo": "Drecullith/omarchy-scope"
