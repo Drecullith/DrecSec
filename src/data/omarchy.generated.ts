@@ -212,7 +212,7 @@ export const omarchyTools: OmarchyTool[] = [
   {
     "id": "repo:omarchy-scope",
     "name": "SCOPE",
-    "version": "v10.10.11",
+    "version": "v0.1.0",
     "stage": "build-candidate",
     "href": "https://github.com/Drecullith/omarchy-scope",
     "sourceRepo": "Drecullith/omarchy-scope"
