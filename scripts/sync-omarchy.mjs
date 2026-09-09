@@ -61,13 +61,19 @@ function toolName(readme, fallback) {
 }
 
 function toolVersion(readme) {
-  const match = readme.match(/\b(?:version\s*)?v?(\d+\.\d+\.\d+)\b/i)
-  return match ? `v${match[1]}` : null
+  const explicitVersion = readme.match(/\bversion\s+v?(\d+\.\d+\.\d+)\b/i)
+  if (explicitVersion) return `v${explicitVersion[1]}`
+
+  const headingVersion = readme.match(/^#\s+.*?\bv(\d+\.\d+\.\d+)\b.*$/im)
+  if (headingVersion) return `v${headingVersion[1]}`
+
+  const statusVersion = readme.match(/^\s*`?v?(\d+\.\d+\.\d+)`?\s+is\b/im)
+  return statusVersion ? `v${statusVersion[1]}` : null
 }
 
-function toolStage(readme) {
+function toolStage(readme, version) {
   if (/\bbuild candidate\b/i.test(readme)) return 'build-candidate'
-  if (/\bcomplete scope\b/i.test(readme) || /\bv?1\.\d+\.\d+\b/i.test(readme)) return 'released'
+  if (/\bcomplete scope\b/i.test(readme) || version?.startsWith('v1.')) return 'released'
   return 'public'
 }
 
@@ -107,11 +113,12 @@ async function syncContributionTools() {
     readmePaths.map(async (path) => {
       const slug = path.split('/')[1]
       const readme = await readPublicFile(contributionRepo, path)
+      const version = toolVersion(readme)
       return {
         id: `contrib:${slug}`,
         name: toolName(readme, slug),
-        version: toolVersion(readme),
-        stage: toolStage(readme),
+        version,
+        stage: toolStage(readme, version),
         href: `https://github.com/${contributionRepo}/tree/main/tools/${slug}`,
         sourceRepo: contributionRepo,
       }
@@ -123,11 +130,12 @@ async function syncStandaloneTools() {
   return Promise.all(
     standaloneToolRepos.map(async ({ id, repo, ref }) => {
       const readme = await readPublicFile(repo, 'README.md', ref)
+      const version = toolVersion(readme)
       return {
         id,
         name: toolName(readme, repo.split('/').at(-1)),
-        version: toolVersion(readme),
-        stage: toolStage(readme),
+        version,
+        stage: toolStage(readme, version),
         href: `https://github.com/${repo}`,
         sourceRepo: repo,
       }
