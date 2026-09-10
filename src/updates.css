@@ -1,0 +1,94 @@
+/* Chronological public milestone feed for the Omarchy Contributions case study. */
+
+.case-update-list {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.case-update-card {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 30px;
+  gap: 24px;
+  align-items: start;
+  padding: 26px 22px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(11,15,21,.34);
+  transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.case-update-card:hover,
+.case-update-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(128,242,190,.30);
+  background: rgba(13,20,23,.72);
+  box-shadow: 0 14px 34px rgba(0,0,0,.20), 0 0 22px rgba(128,242,190,.045);
+}
+
+.case-update-date {
+  color: #778492;
+  font: 700 .68rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.case-update-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  color: #71808d;
+  font: 700 .64rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.case-update-copy h3 {
+  margin: 10px 0 0;
+  font-size: 1.14rem;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+}
+
+.case-update-copy h3 em {
+  color: var(--accent);
+  font: inherit;
+  font-style: normal;
+}
+
+.case-update-copy ul {
+  display: grid;
+  gap: 7px;
+  margin: 15px 0 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.6;
+}
+
+.case-update-copy li::marker { color: rgba(128,242,190,.62); }
+
+.case-update-arrow {
+  color: #5e6b78;
+  font-size: 1.15rem;
+  transition: color .18s ease, transform .18s ease;
+}
+
+.case-update-card:hover .case-update-arrow,
+.case-update-card:focus-visible .case-update-arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 720px) {
+  .case-update-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 22px 4px;
+  }
+
+  .case-update-arrow { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-update-card,
+  .case-update-arrow { transition: none; }
+}

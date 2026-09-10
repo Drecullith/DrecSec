@@ -33,6 +33,9 @@ jobs:
       - name: Security configuration check
         run: npm run security:check
 
+      - name: Sync parser tests
+        run: npm test
+
       - name: Typecheck
         run: npm run typecheck
 

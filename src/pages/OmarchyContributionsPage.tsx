@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { SectionHeading } from '../components/SectionHeading'
 import { omarchyPullRequests, omarchyTools } from '../data/omarchy.generated'
+import { omarchyUpdates } from '../data/omarchy-updates.generated'
 
 const details: Record<number, { summary: string; issue?: string; test?: string }> = {
   10623: {
@@ -48,14 +49,19 @@ const toolDetails: Record<string, ToolPresentation> = {
     points: ['No sudo or daemon', 'Atomic config replacement', 'Byte-for-byte restore snapshot', 'Never executes plugin code'],
   },
   'contrib:rollback-check': {
-    command: 'omrollback-check',
-    description: 'A read-only diagnostic for root/home migration-ledger drift after a root snapshot restore, with conservative CONFIRMED and POTENTIAL evidence classes.',
-    points: ['Read-only by design', 'No migration replay', 'No snapshot changes', 'No network or telemetry'],
+    command: 'omrollback-check / omrollback-plan',
+    description: 'Read-only rollback-drift diagnostics plus a guided recovery planner that keeps evidence classification separate from any actual repair action.',
+    points: ['Read-only by design', 'No automatic recovery', 'Stable plan schema', 'Optional Context Snapshot correlation'],
   },
   'contrib:migration-check': {
     command: 'ommigration-check',
     description: 'A read-only Quattro audit for legacy Hyprland .conf files that can survive the 3.x to Lua migration even though the active configuration has moved on.',
     points: ['Read-only audit', 'No config conversion', 'No deletion or sourcing', 'Conservative result states'],
+  },
+  'contrib:context-snapshot': {
+    command: 'omcontext',
+    description: 'A local, read-only baseline and incident-delta collector that answers what changed since an Omarchy machine was known-good without uploading machine data.',
+    points: ['Private local state', 'No network code', 'Stable schema v1', 'Sanitized bounded evidence'],
   },
   'repo:omarchy-scope': {
     description: 'An Omarchy Quattro engagement HUD for ethical hackers and CTF players that keeps authorization scope, current targets, imported evidence, quarantine, and route changes visible without becoming a scanner or exploitation framework.',
@@ -65,6 +71,10 @@ const toolDetails: Record<string, ToolPresentation> = {
 
 function formatDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(value))
+}
+
+function formatUpdateDate(value: string) {
+  return formatDate(`${value}T00:00:00Z`)
 }
 
 function effectiveIssue(number: number, generated: string | null) {
@@ -79,6 +89,12 @@ function stageLabel(stage: 'released' | 'build-candidate' | 'public') {
   if (stage === 'build-candidate') return 'build candidate'
   if (stage === 'released') return 'released'
   return 'public'
+}
+
+function prEventLabel(event: 'opened' | 'merged' | 'closed') {
+  if (event === 'merged') return 'PR merged'
+  if (event === 'closed') return 'PR closed'
+  return 'PR opened'
 }
 
 export function OmarchyContributionsPage() {
@@ -108,7 +124,7 @@ export function OmarchyContributionsPage() {
         </p>
         <div className="case-actions">
           <a className="button primary" href="https://github.com/Drecullith/Omarchy-Contributions" target="_blank" rel="noreferrer">Contribution repo ↗</a>
-          <a className="button secondary" href="#upstream">See upstream PRs ↓</a>
+          <a className="button secondary" href="#updates">Latest updates ↓</a>
         </div>
         <div className="case-stat-grid" aria-label="Contribution snapshot">
           <div className="case-stat"><strong>{omarchyPullRequests.length}</strong><span>upstream PRs submitted</span></div>
@@ -121,7 +137,7 @@ export function OmarchyContributionsPage() {
         <SectionHeading
           kicker="01 / Upstream"
           title="Real issues. Focused fixes."
-          body="The PR list and status come from public GitHub metadata. Technical summaries stay curated so automation never invents claims or republishes unnecessary account data."
+          body="The PR list and status come from minimal structured public GitHub fields. Technical summaries stay curated so automation never invents claims or republishes unnecessary account data."
         />
         <div className="case-pr-list">
           {omarchyPullRequests.map((pr) => {
@@ -152,7 +168,7 @@ export function OmarchyContributionsPage() {
         <SectionHeading
           kicker="02 / Tools & plugins"
           title="Small tools with hard boundaries."
-          body="Tool discovery is synced only from explicitly approved public sources. Released utilities stay clearly separated from build candidates such as SCOPE, so the portfolio can update automatically without pretending unfinished validation is complete."
+          body="Tool discovery is synced only from explicitly approved public sources. Each card is a current snapshot; historical versions stay in the Updates feed instead of being overwritten or duplicated here."
         />
         <div className="case-tool-grid">
           {tools.map((tool) => (
@@ -167,9 +183,41 @@ export function OmarchyContributionsPage() {
         </div>
       </section>
 
+      <section id="updates" className="section shell case-section">
+        <SectionHeading
+          kicker="03 / Updates"
+          title="Published milestones, preserved."
+          body="Release history is parsed only from allowlisted tools/*/CHANGELOG.md files. Upstream activity adds PR opened, merged, and closed milestones — never development commits — so this stays an activity history rather than a noisy commit stream."
+        />
+        <div className="case-update-list">
+          {omarchyUpdates.map((update) => (
+            <a className="case-update-card" href={update.href} target="_blank" rel="noreferrer" key={update.id}>
+              <time className="case-update-date" dateTime={update.date}>{formatUpdateDate(update.date)}</time>
+              <div className="case-update-copy">
+                {update.kind === 'release' ? (
+                  <>
+                    <div className="case-update-meta"><span>Release</span><span>{update.version}</span></div>
+                    <h3>{update.name} <em>{update.version}</em></h3>
+                    {update.bullets.length ? (
+                      <ul>{update.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>
+                    ) : null}
+                  </>
+                ) : (
+                  <>
+                    <div className="case-update-meta"><span>{prEventLabel(update.event)}</span><span>PR #{update.prNumber}</span></div>
+                    <h3>{update.title}</h3>
+                  </>
+                )}
+              </div>
+              <span className="case-update-arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section className="section shell case-section">
         <SectionHeading
-          kicker="03 / Method"
+          kicker="04 / Method"
           title="The workflow is part of the evidence."
           body="The contribution itself matters, but so does the process used to get there. That process stays deliberately repeatable."
         />
@@ -183,9 +231,9 @@ export function OmarchyContributionsPage() {
 
       <section className="section shell case-closing">
         <div>
-          <span className="kicker">04 / Evidence</span>
+          <span className="kicker">05 / Evidence</span>
           <h2>Follow the review trail.</h2>
-          <p>Nothing on this page requires taking the portfolio's word for it. The fixes, tests, commits, and review history are public.</p>
+          <p>Nothing on this page requires taking the portfolio's word for it. The fixes, tests, public release notes, and review history point back to their source.</p>
         </div>
         <div className="case-actions">
           <a className="button primary" href="https://github.com/Drecullith/Omarchy-Contributions" target="_blank" rel="noreferrer">Open repository ↗</a>

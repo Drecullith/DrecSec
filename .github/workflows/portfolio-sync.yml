@@ -6,8 +6,10 @@ on:
     paths:
       - '.github/workflows/portfolio-sync.yml'
       - 'scripts/sync-omarchy.mjs'
+      - 'scripts/omarchy-sync-parser.mjs'
       - 'scripts/check-production-security.mjs'
       - 'src/data/omarchy.generated.ts'
+      - 'src/data/omarchy-updates.generated.ts'
       - 'package.json'
   schedule:
     - cron: '17 6 * * *'
@@ -38,14 +40,14 @@ jobs:
         if: github.event_name == 'push' || hashFiles('package-lock.json') == ''
         run: npm install --package-lock-only --ignore-scripts
 
-      - name: Sync public Omarchy PR evidence
+      - name: Sync allowlisted public Omarchy evidence
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/sync-omarchy.mjs
 
       - name: Commit generated evidence if changed
         run: |
-          git add package-lock.json src/data/omarchy.generated.ts
+          git add package-lock.json src/data/omarchy.generated.ts src/data/omarchy-updates.generated.ts
           if git diff --cached --quiet; then
             echo 'No generated changes to commit.'
             exit 0
