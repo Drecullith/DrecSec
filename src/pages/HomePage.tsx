@@ -36,67 +36,21 @@ function LychnosPreview() {
     <div
       className="lychnos-preview"
       role="img"
-      aria-label="Animated Lychnos concept: a segmented dark orb companion with a blue expressive face cycling through calm, thinking, alert, and listening states."
+      aria-label="Animated Lychnos concept: a segmented dark orb companion with a blue expressive face, shown floating while it notices system problems and waits for permission before acting."
     >
       <span className="lychnos-concept-label">Concept</span>
       <div className="lychnos-stage" aria-hidden="true">
         <span className="lychnos-field lychnos-field-one" />
         <span className="lychnos-field lychnos-field-two" />
-        <svg className="lychnos-avatar" viewBox="0 0 180 150" focusable="false">
-          <defs>
-            <linearGradient id="lychnos-shell-gradient" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="#263347" />
-              <stop offset="0.48" stopColor="#101722" />
-              <stop offset="1" stopColor="#05080d" />
-            </linearGradient>
-            <radialGradient id="lychnos-face-gradient" cx="38%" cy="28%" r="78%">
-              <stop offset="0" stopColor="#172336" />
-              <stop offset="0.38" stopColor="#070b12" />
-              <stop offset="1" stopColor="#010204" />
-            </radialGradient>
-          </defs>
-
-          <ellipse className="lychnos-ground" cx="90" cy="132" rx="42" ry="7" />
-
-          <g className="lychnos-avatar-body">
-            <circle className="lychnos-core-shadow" cx="90" cy="65" r="47" />
-            <g className="lychnos-shell">
-              <path d="M54 31Q70 14 90 14t36 17l-10 13q-12-10-26-10T64 44Z" />
-              <path d="M128 32q17 13 17 32 0 11-5 20l-15-6q4-7 4-14 0-14-10-22Z" />
-              <path d="M140 84q-7 19-24 30l-10-15q11-7 18-22Z" />
-              <path d="M116 114q-13 8-26 8t-26-8l9-16q8 5 17 5t17-5Z" />
-              <path d="M64 114q-17-11-24-30l16-7q7 15 18 22Z" />
-              <path d="M40 84q-5-9-5-20 0-19 17-32l9 10Q51 50 51 64q0 7 5 14Z" />
-            </g>
-
-            <circle className="lychnos-face-glass" cx="90" cy="65" r="34" />
-            <path className="lychnos-face-shine" d="M67 47q11-13 28-14 10 0 18 5" />
-
-            <g className="lychnos-face-state lychnos-face-calm">
-              <path className="lychnos-eye-line" d="M69 64q7-8 14 0" />
-              <path className="lychnos-eye-line" d="M97 64q7-8 14 0" />
-              <path className="lychnos-mouth" d="M82 78q8 6 16 0" />
-            </g>
-
-            <g className="lychnos-face-state lychnos-face-thinking">
-              <path className="lychnos-eye-line" d="M69 64h13" />
-              <path className="lychnos-eye-line" d="M98 64h13" />
-              <circle className="lychnos-thought-dot" cx="111" cy="74" r="2.4" />
-            </g>
-
-            <g className="lychnos-face-state lychnos-face-alert">
-              <path className="lychnos-alert-eye" d="M68 61l14 5" />
-              <path className="lychnos-alert-eye" d="M112 61l-14 5" />
-              <path className="lychnos-alert-mouth" d="M84 79h12" />
-            </g>
-
-            <g className="lychnos-face-state lychnos-face-listening">
-              <circle className="lychnos-listen-eye" cx="76" cy="64" r="4.2" />
-              <circle className="lychnos-listen-eye" cx="104" cy="64" r="4.2" />
-            </g>
-          </g>
-        </svg>
-
+        <img
+          className="lychnos-mascot-image"
+          src="/lychnos-mascot.webp"
+          alt=""
+          width="640"
+          height="640"
+          loading="lazy"
+          decoding="async"
+        />
         <span className="lychnos-bubble lychnos-bubble-one">terminal 3 hit a snag</span>
         <span className="lychnos-bubble lychnos-bubble-two">want me to explain it?</span>
         <span className="lychnos-bubble lychnos-bubble-three">waiting for permission</span>
