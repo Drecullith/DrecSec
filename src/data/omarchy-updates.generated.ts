@@ -72,6 +72,96 @@ export const omarchyUpdates: OmarchyUpdate[] = [
     "href": "https://github.com/Drecullith/Omarchy-Contributions/tree/main/tools/rollback-check"
   },
   {
+    "kind": "pr",
+    "prNumber": 11089,
+    "title": "Add out-of-band plugin rescue",
+    "href": "https://github.com/omacom/omarchy/pull/11089",
+    "id": "pr:11089:opened",
+    "date": "2026-09-10",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10905,
+    "title": "Validate GNOME icon themes before applying",
+    "href": "https://github.com/omacom/omarchy/pull/10905",
+    "id": "pr:10905:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10899,
+    "title": "Bound running browser policy refreshes",
+    "href": "https://github.com/omacom/omarchy/pull/10899",
+    "id": "pr:10899:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10890,
+    "title": "Classify T2 built-in trackpads as internal",
+    "href": "https://github.com/omacom/omarchy/pull/10890",
+    "id": "pr:10890:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10886,
+    "title": "Repair T1 Mac PCIe hotplug defaults",
+    "href": "https://github.com/omacom/omarchy/pull/10886",
+    "id": "pr:10886:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10878,
+    "title": "Converge ISO Node pins on normal updates",
+    "href": "https://github.com/omacom/omarchy/pull/10878",
+    "id": "pr:10878:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10877,
+    "title": "Target the actual NVMe controller in Apple suspend fix",
+    "href": "https://github.com/omacom/omarchy/pull/10877",
+    "id": "pr:10877:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10872,
+    "title": "Limit terminal cwd inheritance to terminal windows",
+    "href": "https://github.com/omacom/omarchy/pull/10872",
+    "id": "pr:10872:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10869,
+    "title": "Prevent lock-screen wake loop during idle transition",
+    "href": "https://github.com/omacom/omarchy/pull/10869",
+    "id": "pr:10869:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10866,
+    "title": "Clarify theme-scoped and global settings",
+    "href": "https://github.com/omacom/omarchy/pull/10866",
+    "id": "pr:10866:opened",
+    "date": "2026-09-08",
+    "event": "opened"
+  },
+  {
     "id": "release:contrib:migration-check:omarchy-migration-check:v1.0.0:2026-09-07",
     "kind": "release",
     "date": "2026-09-07",
@@ -88,6 +178,24 @@ export const omarchyUpdates: OmarchyUpdate[] = [
       "Add isolated regression tests, installer coverage, research notes, and CI integration."
     ],
     "href": "https://github.com/Drecullith/Omarchy-Contributions/tree/main/tools/migration-check"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10742,
+    "title": "Warn about orphaned legacy Hyprland config",
+    "href": "https://github.com/omacom/omarchy/pull/10742",
+    "id": "pr:10742:opened",
+    "date": "2026-09-07",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10623,
+    "title": "Fix explicit bar toggle direction",
+    "href": "https://github.com/omacom/omarchy/pull/10623",
+    "id": "pr:10623:opened",
+    "date": "2026-09-07",
+    "event": "opened"
   },
   {
     "id": "release:contrib:plugin-rescue:omarchy-plugin-rescue:v1.0.0:2026-09-06",
@@ -121,5 +229,50 @@ export const omarchyUpdates: OmarchyUpdate[] = [
       "Added isolated regression tests covering false positives, changed upstream migration revisions, conditional/temporary machine markers, non-Btrfs layouts, and non-execution of migration scripts."
     ],
     "href": "https://github.com/Drecullith/Omarchy-Contributions/tree/main/tools/rollback-check"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10535,
+    "title": "Use Ctrl+V for clipboard image paste",
+    "href": "https://github.com/omacom/omarchy/pull/10535",
+    "id": "pr:10535:opened",
+    "date": "2026-09-06",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10513,
+    "title": "Drop browser codec preloads from yt-dlp host",
+    "href": "https://github.com/omacom/omarchy/pull/10513",
+    "id": "pr:10513:opened",
+    "date": "2026-09-06",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10501,
+    "title": "Keep Bluetooth device actions on the panel adapter",
+    "href": "https://github.com/omacom/omarchy/pull/10501",
+    "id": "pr:10501:opened",
+    "date": "2026-09-06",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10497,
+    "title": "Restore GVfs mounts after system resume",
+    "href": "https://github.com/omacom/omarchy/pull/10497",
+    "id": "pr:10497:opened",
+    "date": "2026-09-06",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10490,
+    "title": "Scope 1Password floating geometry to main window",
+    "href": "https://github.com/omacom/omarchy/pull/10490",
+    "id": "pr:10490:opened",
+    "date": "2026-09-06",
+    "event": "opened"
   }
 ]
