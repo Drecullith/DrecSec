@@ -44,7 +44,7 @@ function LychnosPreview() {
         <span className="lychnos-field lychnos-field-two" />
         <img
           className="lychnos-mascot-image"
-          src="/lychnos-mascot.webp"
+          src="/lychnos-mascot.webp?v=2"
           alt=""
           width="640"
           height="640"
