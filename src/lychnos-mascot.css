@@ -1,24 +1,25 @@
 /* Rendered Lychnos concept mascot layered onto the existing lightweight state animation. */
 .lychnos-avatar { display: none; }
 
-.lychnos-stage::after {
-  content: '';
+.lychnos-mascot-image {
   position: absolute;
   z-index: 2;
   left: 50%;
   top: 2px;
   width: 154px;
   height: 124px;
+  object-fit: contain;
+  object-position: center;
   transform: translateX(-50%);
-  background: url('/lychnos-mascot.webp') center / contain no-repeat;
   filter: drop-shadow(0 10px 14px rgba(0,0,0,.56)) drop-shadow(0 0 13px rgba(63,174,255,.16));
   animation: lychnos-render-float 4.8s ease-in-out infinite;
   pointer-events: none;
+  user-select: none;
 }
 
-.project-card--lychnos:hover .lychnos-stage::after,
-.project-card--lychnos:focus-within .lychnos-stage::after,
-.project-card--lychnos:active .lychnos-stage::after {
+.project-card--lychnos:hover .lychnos-mascot-image,
+.project-card--lychnos:focus-within .lychnos-mascot-image,
+.project-card--lychnos:active .lychnos-mascot-image {
   filter: drop-shadow(0 11px 16px rgba(0,0,0,.60)) drop-shadow(0 0 20px rgba(73,190,255,.28));
 }
 
@@ -28,19 +29,19 @@
 }
 
 @media (max-width: 1050px) and (min-width: 721px) {
-  .lychnos-stage::after {
+  .lychnos-mascot-image {
     width: 166px;
     height: 132px;
   }
 }
 
 @media (max-width: 720px) {
-  .lychnos-stage::after {
+  .lychnos-mascot-image {
     width: min(190px, 68vw);
     height: 145px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lychnos-stage::after { animation: none; }
+  .lychnos-mascot-image { animation: none; }
 }
