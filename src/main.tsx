@@ -6,6 +6,7 @@ import './portfolio.css'
 import './highlights.css'
 import './updates.css'
 import './home-visuals.css'
+import './polish.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

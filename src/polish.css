@@ -1,0 +1,240 @@
+/* Final homepage polish: interaction-only featured glow, DrecSec identity mark, and Lychnos concept motion. */
+
+/* DrecSec mark: a shield/circuit D built as native SVG so it stays sharp at every size. */
+.brand-mark {
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px rgba(128,242,190,.08));
+}
+.brand-mark .brand-mark-shell,
+.brand-mark .brand-mark-shield,
+.brand-mark .brand-mark-circuit {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.brand-mark .brand-mark-shell { stroke-width: 2.7; }
+.brand-mark .brand-mark-shield { stroke-width: 2.15; opacity: .88; }
+.brand-mark .brand-mark-circuit { stroke-width: 2; opacity: .9; }
+.brand-mark .brand-mark-node {
+  fill: #07100c;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+.brand-mark .brand-mark-core {
+  fill: var(--accent);
+  stroke: #07100c;
+  stroke-width: 1.7;
+}
+
+/* Featured means larger and more important — not permanently lit up. */
+.project-card--featured {
+  border-color: rgba(255,255,255,.11);
+  background: linear-gradient(145deg, rgba(16,22,29,.92), rgba(8,11,16,.74));
+  box-shadow: 0 22px 60px rgba(0,0,0,.22);
+}
+.project-card--featured::before {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+}
+.project-card--featured::after {
+  opacity: .08;
+  filter: grayscale(1);
+}
+.project-card--featured .project-identity {
+  border-color: rgba(255,255,255,.13);
+  background: linear-gradient(150deg, rgba(18,25,34,.92), rgba(8,11,16,.78));
+  box-shadow: inset 0 0 28px rgba(255,255,255,.018);
+}
+
+/* Mint arrives only when the featured case study is actually interacted with. */
+.project-card--featured:hover,
+.project-card--featured:focus-within,
+.project-card--featured:active {
+  border-color: rgba(128,242,190,.64);
+  background:
+    radial-gradient(circle at 82% 16%, rgba(128,242,190,.22), transparent 27%),
+    radial-gradient(circle at 66% 74%, rgba(128,242,190,.09), transparent 25%),
+    linear-gradient(145deg, rgba(20,39,33,.96), rgba(8,12,16,.76));
+  box-shadow:
+    0 30px 78px rgba(0,0,0,.38),
+    0 0 54px rgba(128,242,190,.18),
+    0 0 104px rgba(128,242,190,.075),
+    inset 0 0 58px rgba(128,242,190,.045);
+}
+.project-card--featured:hover::before,
+.project-card--featured:focus-within::before,
+.project-card--featured:active::before {
+  background: linear-gradient(90deg, transparent, rgba(128,242,190,.88), transparent);
+}
+.project-card--featured:hover::after,
+.project-card--featured:focus-within::after,
+.project-card--featured:active::after {
+  opacity: .16;
+  filter: none;
+}
+.project-card--featured:hover .project-identity,
+.project-card--featured:focus-within .project-identity,
+.project-card--featured:active .project-identity {
+  border-color: rgba(128,242,190,.42);
+  background: rgba(128,242,190,.075);
+  box-shadow: 0 0 30px rgba(128,242,190,.15), inset 0 0 30px rgba(128,242,190,.045);
+}
+
+/* Lychnos concept: ambient orb -> notice event -> explain/propose -> permission. */
+.project-card--lychnos { isolation: isolate; }
+.project-card--lychnos .tags { padding-right: 150px; }
+.lychnos-preview {
+  position: absolute;
+  z-index: 2;
+  right: 18px;
+  bottom: 22px;
+  width: 142px;
+  height: 126px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(128,242,190,.055), transparent 33%),
+    rgba(6,9,13,.72);
+  box-shadow: inset 0 0 28px rgba(128,242,190,.018);
+}
+.lychnos-stage { position: relative; width: 100%; height: 100%; }
+.lychnos-orbit,
+.lychnos-orb,
+.lychnos-eye,
+.lychnos-bubble,
+.lychnos-state { position: absolute; }
+.lychnos-orbit {
+  left: 50%;
+  top: 47px;
+  border: 1px solid rgba(128,242,190,.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.lychnos-orbit-one {
+  width: 62px;
+  height: 62px;
+  animation: lychnos-ring 4.8s ease-in-out infinite;
+}
+.lychnos-orbit-two {
+  width: 82px;
+  height: 82px;
+  opacity: .42;
+  animation: lychnos-ring 4.8s 1.2s ease-in-out infinite;
+}
+.lychnos-orb {
+  left: 50%;
+  top: 47px;
+  width: 35px;
+  height: 35px;
+  border: 1px solid rgba(167,255,207,.72);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 32%, rgba(255,255,255,.78) 0 3%, transparent 4%),
+    radial-gradient(circle at center, rgba(128,242,190,.94), rgba(128,242,190,.28) 42%, rgba(8,17,14,.96) 72%);
+  box-shadow:
+    0 0 12px rgba(128,242,190,.34),
+    0 0 28px rgba(128,242,190,.15),
+    inset 0 0 11px rgba(255,255,255,.16);
+  transform: translate(-50%, -50%);
+  animation: lychnos-orb-breathe 3.2s ease-in-out infinite;
+}
+.lychnos-eye {
+  top: 15px;
+  width: 4px;
+  height: 2px;
+  border-radius: 999px;
+  background: #06110c;
+  opacity: .78;
+  animation: lychnos-blink 4.4s infinite;
+}
+.lychnos-eye-left { left: 11px; }
+.lychnos-eye-right { right: 11px; }
+.lychnos-bubble {
+  left: 10px;
+  right: 10px;
+  bottom: 22px;
+  padding: 6px 7px;
+  border: 1px solid rgba(128,242,190,.14);
+  border-radius: 8px;
+  color: #a8b8af;
+  background: rgba(7,12,15,.92);
+  font: 600 .48rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-align: center;
+  letter-spacing: .02em;
+  opacity: 0;
+  transform: translateY(5px);
+}
+.lychnos-bubble-one { animation: lychnos-message-one 7.2s ease-in-out infinite; }
+.lychnos-bubble-two { animation: lychnos-message-two 7.2s ease-in-out infinite; }
+.lychnos-state {
+  left: 0;
+  right: 0;
+  bottom: 7px;
+  color: #56655e;
+  font: 700 .42rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .075em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@keyframes lychnos-orb-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(.96); box-shadow: 0 0 10px rgba(128,242,190,.26), 0 0 24px rgba(128,242,190,.11), inset 0 0 11px rgba(255,255,255,.14); }
+  50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 16px rgba(128,242,190,.48), 0 0 36px rgba(128,242,190,.19), inset 0 0 13px rgba(255,255,255,.20); }
+}
+@keyframes lychnos-ring {
+  0%, 100% { opacity: .18; transform: translate(-50%, -50%) scale(.86); }
+  48% { opacity: .52; transform: translate(-50%, -50%) scale(1.06); }
+}
+@keyframes lychnos-blink {
+  0%, 44%, 48%, 100% { transform: scaleY(1); }
+  46% { transform: scaleY(.15); }
+}
+@keyframes lychnos-message-one {
+  0%, 8%, 46%, 100% { opacity: 0; transform: translateY(5px); }
+  14%, 39% { opacity: 1; transform: translateY(0); }
+}
+@keyframes lychnos-message-two {
+  0%, 46%, 92%, 100% { opacity: 0; transform: translateY(5px); }
+  54%, 84% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1050px) and (min-width: 721px) {
+  .project-card--lychnos .tags { padding-right: 0; }
+  .lychnos-preview {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 132px;
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 720px) {
+  .project-card--featured { box-shadow: 0 18px 42px rgba(0,0,0,.20); }
+  .project-card--featured::after { opacity: .05; }
+  .project-card--lychnos .tags { padding-right: 0; }
+  .lychnos-preview {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 146px;
+    margin-top: 20px;
+  }
+  .lychnos-orbit-one { width: 68px; height: 68px; }
+  .lychnos-orbit-two { width: 92px; height: 92px; }
+  .lychnos-orb { top: 52px; width: 39px; height: 39px; }
+  .lychnos-orbit { top: 52px; }
+  .lychnos-bubble { bottom: 24px; font-size: .53rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lychnos-orbit,
+  .lychnos-orb,
+  .lychnos-eye,
+  .lychnos-bubble { animation: none; }
+  .lychnos-bubble-one { opacity: 1; transform: none; }
+  .lychnos-bubble-two { display: none; }
+}

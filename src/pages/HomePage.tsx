@@ -31,6 +31,28 @@ function ProjectMark({ name }: { name: ProjectMarkName }) {
   )
 }
 
+function LychnosPreview() {
+  return (
+    <div
+      className="lychnos-preview"
+      role="img"
+      aria-label="Animated concept of Lychnos as a small ambient orb that notices a system problem, explains it, and asks permission before acting."
+    >
+      <div className="lychnos-stage" aria-hidden="true">
+        <span className="lychnos-orbit lychnos-orbit-one" />
+        <span className="lychnos-orbit lychnos-orbit-two" />
+        <span className="lychnos-orb">
+          <i className="lychnos-eye lychnos-eye-left" />
+          <i className="lychnos-eye lychnos-eye-right" />
+        </span>
+        <span className="lychnos-bubble lychnos-bubble-one">terminal 3 hit a snag</span>
+        <span className="lychnos-bubble lychnos-bubble-two">explain → propose → ask permission</span>
+        <span className="lychnos-state">ambient · local-first</span>
+      </div>
+    </div>
+  )
+}
+
 function formatActivityDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',
@@ -126,6 +148,7 @@ export function HomePage() {
               project.href ? 'project-card-link' : '',
               project.featured ? 'project-card--featured' : '',
               project.planned ? 'project-card--planned' : '',
+              project.mark === 'lychnos' ? 'project-card--lychnos' : '',
             ].filter(Boolean).join(' ')
 
             const content = (
@@ -142,6 +165,7 @@ export function HomePage() {
                   </div>
                 </div>
                 <p>{project.description}</p>
+                {project.mark === 'lychnos' ? <LychnosPreview /> : null}
                 <div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
                 {project.href ? <span className="project-card-cta">View case study <span aria-hidden="true">→</span></span> : null}
               </>
