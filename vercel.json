@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/projects/omarchy-contributions", "destination": "/index.html" }
   ],
   "headers": [
     {

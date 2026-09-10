@@ -12,8 +12,8 @@ export const projects = [
     eyebrow: 'Ambient AI',
     title: 'Lychnos',
     description:
-      'A local-first assistant project for Linux and Omarchy: explain system events, surface problems clearly, and keep the user in control of every meaningful action.',
-    status: 'In development',
+      'A planned local-first assistant for Linux and Omarchy: explain system events, surface problems clearly, and keep the user in control of every meaningful action.',
+    status: 'Planned',
     tags: ['Rust', 'Linux', 'Local-first'],
     href: null,
   },

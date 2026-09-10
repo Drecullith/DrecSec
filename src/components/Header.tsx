@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Mark } from './Mark'
 
 export function Header() {
@@ -8,6 +8,17 @@ export function Header() {
     setOpen(false)
   }
 
+  useEffect(() => {
+    if (!open) return
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setOpen(false)
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [open])
+
   return (
     <header className="site-header">
       <div className="shell header-inner">
@@ -16,9 +27,18 @@ export function Header() {
           <span><strong>DRECSEC</strong><small>by Drecullith</small></span>
         </a>
 
-        <button className="menu-button" type="button" aria-label="Toggle navigation" aria-expanded={open} onClick={() => setOpen((value) => !value)}><span /><span /></button>
+        <button
+          className="menu-button"
+          type="button"
+          aria-label={open ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={open}
+          aria-controls="primary-navigation"
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span /><span />
+        </button>
 
-        <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
+        <nav id="primary-navigation" className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
           <a href="/#about" onClick={close}>About</a>
           <a href="/#projects" onClick={close}>Projects</a>
           <a href="/#journey" onClick={close}>Journey</a>
