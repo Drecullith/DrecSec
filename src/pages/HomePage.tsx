@@ -1,9 +1,48 @@
 import { useState } from 'react'
+import { Mark } from '../components/Mark'
 import { SectionHeading } from '../components/SectionHeading'
+import { omarchyUpdates } from '../data/omarchy-updates.generated'
 import { journey, projects } from '../data/site'
+
+type ProjectMarkName = 'drecsec' | 'lychnos' | 'omarchy' | 'ctf'
+
+function ProjectMark({ name }: { name: ProjectMarkName }) {
+  return (
+    <span className={`project-identity project-identity--${name}`} aria-hidden="true">
+      {name === 'drecsec' ? (
+        <Mark size={38} />
+      ) : name === 'omarchy' ? (
+        <svg viewBox="0 0 48 48" focusable="false">
+          <path d="M10 10h11v11H10zM27 10h11v11H27zM10 27h11v11H10zM27 27h11v11H27z" />
+          <path d="M21 15.5h6M21 32.5h6M15.5 21v6M32.5 21v6" />
+        </svg>
+      ) : name === 'lychnos' ? (
+        <svg viewBox="0 0 48 48" focusable="false">
+          <circle cx="24" cy="24" r="9" />
+          <path d="M24 7v6M24 35v6M7 24h6M35 24h6M12 12l4.5 4.5M31.5 31.5 36 36M36 12l-4.5 4.5M16.5 31.5 12 36" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 48 48" focusable="false">
+          <path d="M14 39V9M15 11h19l-5 7 5 7H15" />
+          <path d="M12 39h11" />
+        </svg>
+      )}
+    </span>
+  )
+}
+
+function formatActivityDate(value: string) {
+  return new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${value}T00:00:00Z`))
+}
 
 export function HomePage() {
   const [copied, setCopied] = useState(false)
+  const latestActivity = omarchyUpdates.slice(0, 3)
 
   async function copyHandle() {
     try {
@@ -81,22 +120,65 @@ export function HomePage() {
       <section id="projects" className="section shell">
         <SectionHeading kicker="02 / Projects" title="The workbench." body="Active projects and the systems around them. Verified activity and write-ups keep this portfolio grounded in real work." />
         <div className="project-grid">
-          {projects.map((project) => project.href ? (
-            <a className="project-card project-card-link" href={project.href} key={project.title} aria-label={`Open ${project.title} case study`}>
-              <div className="project-meta"><span>{project.eyebrow}</span><span className="project-status">{project.status}</span></div>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-              <span className="project-card-cta">View case study <span aria-hidden="true">→</span></span>
-            </a>
-          ) : (
-            <article className="project-card" key={project.title}>
-              <div className="project-meta"><span>{project.eyebrow}</span><span className="project-status">{project.status}</span></div>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-            </article>
-          ))}
+          {projects.map((project) => {
+            const classes = [
+              'project-card',
+              project.href ? 'project-card-link' : '',
+              project.featured ? 'project-card--featured' : '',
+              project.planned ? 'project-card--planned' : '',
+            ].filter(Boolean).join(' ')
+
+            const content = (
+              <>
+                <div className="project-meta">
+                  <span>{project.eyebrow}</span>
+                  <span className="project-status">{project.status}</span>
+                </div>
+                <div className="project-title-row">
+                  <ProjectMark name={project.mark as ProjectMarkName} />
+                  <div>
+                    {project.featured ? <span className="project-featured-label">Featured case study</span> : null}
+                    <h3>{project.title}</h3>
+                  </div>
+                </div>
+                <p>{project.description}</p>
+                <div className="tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+                {project.href ? <span className="project-card-cta">View case study <span aria-hidden="true">→</span></span> : null}
+              </>
+            )
+
+            return project.href ? (
+              <a className={classes} href={project.href} key={project.title} aria-label={`Open ${project.title} case study`}>
+                {content}
+              </a>
+            ) : (
+              <article className={classes} key={project.title}>
+                {content}
+              </article>
+            )
+          })}
+        </div>
+
+        <div className="activity-strip" aria-labelledby="latest-activity-title">
+          <div className="activity-strip-head">
+            <div>
+              <span className="kicker mini">Latest verified activity</span>
+              <h3 id="latest-activity-title">Recent public milestones.</h3>
+            </div>
+            <a href="/projects/omarchy-contributions#updates">Full history <span aria-hidden="true">→</span></a>
+          </div>
+          <div className="activity-grid">
+            {latestActivity.map((update) => (
+              <a className={`activity-card activity-card--${update.kind}`} href={update.href} target="_blank" rel="noreferrer" key={update.id}>
+                <div className="activity-card-top">
+                  <span>{update.kind === 'release' ? `Release · ${update.version}` : `PR #${update.prNumber} · ${update.event}`}</span>
+                  <time dateTime={update.date}>{formatActivityDate(update.date)}</time>
+                </div>
+                <strong>{update.kind === 'release' ? update.name : update.title}</strong>
+                <span className="activity-card-link">Verified source ↗</span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 

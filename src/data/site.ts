@@ -1,5 +1,6 @@
 export const projects = [
   {
+    mark: 'drecsec',
     eyebrow: 'Platform',
     title: 'DrecSec',
     description:
@@ -7,8 +8,11 @@ export const projects = [
     status: 'Building now',
     tags: ['React', 'TypeScript', 'Security by design'],
     href: null,
+    featured: false,
+    planned: false,
   },
   {
+    mark: 'lychnos',
     eyebrow: 'Ambient AI',
     title: 'Lychnos',
     description:
@@ -16,8 +20,11 @@ export const projects = [
     status: 'Planned',
     tags: ['Rust', 'Linux', 'Local-first'],
     href: null,
+    featured: false,
+    planned: true,
   },
   {
+    mark: 'omarchy',
     eyebrow: 'Open source',
     title: 'Omarchy Contributions',
     description:
@@ -25,8 +32,11 @@ export const projects = [
     status: 'Case study',
     tags: ['Git', 'Bash', 'Linux', 'Regression tests'],
     href: '/projects/omarchy-contributions',
+    featured: true,
+    planned: false,
   },
   {
+    mark: 'ctf',
     eyebrow: 'Security learning',
     title: 'CTF Field Notes',
     description:
@@ -34,6 +44,8 @@ export const projects = [
     status: 'Next up',
     tags: ['CTF', 'Write-ups', 'Methodology'],
     href: null,
+    featured: false,
+    planned: true,
   },
 ]
 
