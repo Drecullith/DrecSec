@@ -1,5 +1,17 @@
 export const projects = [
   {
+    mark: 'omarchy',
+    eyebrow: 'Open source',
+    title: 'Omarchy Contributions',
+    description:
+      'Learning Linux and software engineering by contributing upstream: reproducing issues, preparing focused fixes, adding regression tests, and shipping small tools with explicit safety boundaries.',
+    status: 'Case study',
+    tags: ['Git', 'Bash', 'Linux', 'Regression tests'],
+    href: '/projects/omarchy-contributions',
+    featured: true,
+    planned: false,
+  },
+  {
     mark: 'drecsec',
     eyebrow: 'Platform',
     title: 'DrecSec',
@@ -22,18 +34,6 @@ export const projects = [
     href: null,
     featured: false,
     planned: true,
-  },
-  {
-    mark: 'omarchy',
-    eyebrow: 'Open source',
-    title: 'Omarchy Contributions',
-    description:
-      'Learning Linux and software engineering by contributing upstream: reproducing issues, preparing focused fixes, adding regression tests, and shipping small tools with explicit safety boundaries.',
-    status: 'Case study',
-    tags: ['Git', 'Bash', 'Linux', 'Regression tests'],
-    href: '/projects/omarchy-contributions',
-    featured: true,
-    planned: false,
   },
   {
     mark: 'ctf',

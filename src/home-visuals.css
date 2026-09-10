@@ -1,8 +1,15 @@
 /* Homepage visual hierarchy: project identities, featured evidence, and latest public activity. */
 
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .project-card {
   position: relative;
   overflow: hidden;
+  grid-column: span 4;
 }
 
 .project-title-row {
@@ -33,6 +40,7 @@
   color: #9bb0a4;
   background: linear-gradient(150deg, rgba(18,25,34,.92), rgba(8,11,16,.78));
   box-shadow: inset 0 0 28px rgba(255,255,255,.018);
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease, transform .2s ease;
 }
 
 .project-identity svg:not(.brand-mark) {
@@ -51,70 +59,169 @@
 .project-identity--lychnos { color: #83978e; }
 .project-identity--ctf { color: #7f8b98; }
 
+/* Make the strongest evidence impossible to miss. */
 .project-card--featured {
-  border-color: rgba(128,242,190,.28);
+  grid-column: 1 / -1;
+  min-height: 390px;
+  padding: 34px 38px;
+  border-color: rgba(128,242,190,.34);
   background:
-    radial-gradient(circle at 92% 8%, rgba(128,242,190,.10), transparent 34%),
-    linear-gradient(155deg, rgba(17,29,27,.80), rgba(8,11,16,.66));
-  box-shadow: inset 0 0 42px rgba(128,242,190,.018);
+    radial-gradient(circle at 82% 16%, rgba(128,242,190,.16), transparent 26%),
+    radial-gradient(circle at 66% 74%, rgba(128,242,190,.065), transparent 24%),
+    linear-gradient(145deg, rgba(18,32,29,.92), rgba(8,11,16,.72));
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.24),
+    0 0 42px rgba(128,242,190,.045),
+    inset 0 0 54px rgba(128,242,190,.022);
 }
 
 .project-card--featured::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 24px;
-  right: 24px;
+  left: 38px;
+  right: 38px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(128,242,190,.68), transparent);
+  background: linear-gradient(90deg, transparent, rgba(128,242,190,.88), transparent);
   pointer-events: none;
 }
 
+.project-card--featured::after {
+  content: '';
+  position: absolute;
+  top: 34px;
+  right: 34px;
+  width: min(34vw, 390px);
+  aspect-ratio: 1;
+  opacity: .16;
+  background-image:
+    linear-gradient(rgba(128,242,190,.32) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(128,242,190,.32) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at center, black 0 42%, transparent 76%);
+  transform: perspective(620px) rotateY(-16deg) rotateX(7deg);
+  pointer-events: none;
+}
+
+.project-card--featured > * {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card--featured .project-title-row {
+  margin-top: 58px;
+  gap: 22px;
+  max-width: 760px;
+}
+
 .project-card--featured .project-identity {
-  border-color: rgba(128,242,190,.25);
-  background: rgba(128,242,190,.055);
-  box-shadow: 0 0 24px rgba(128,242,190,.06), inset 0 0 28px rgba(128,242,190,.035);
+  width: 78px;
+  height: 78px;
+  border-radius: 20px;
+  border-color: rgba(128,242,190,.32);
+  background: rgba(128,242,190,.07);
+  box-shadow: 0 0 30px rgba(128,242,190,.09), inset 0 0 30px rgba(128,242,190,.045);
+}
+
+.project-card--featured .project-identity svg:not(.brand-mark) {
+  width: 45px;
+  height: 45px;
+}
+
+.project-card--featured .project-title-row h3 {
+  font-size: clamp(2.35rem, 5vw, 4.2rem);
+  line-height: .98;
+  letter-spacing: -.055em;
+}
+
+.project-card--featured > p {
+  max-width: 760px;
+  margin-top: 26px;
+  color: #aab5bd;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.project-card--featured .tags {
+  max-width: 760px;
+  padding-top: 30px;
+}
+
+.project-card--featured .project-card-cta {
+  margin-top: 28px;
+  font-size: .72rem;
 }
 
 .project-featured-label {
   display: block;
-  margin-bottom: 7px;
+  margin-bottom: 9px;
   color: var(--accent);
-  font: 700 .61rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .10em;
+  font: 700 .63rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
   text-transform: uppercase;
 }
 
+/* Planned work is quieter at rest, but still gets the site's proper interactive glow. */
 .project-card--planned {
-  border-color: rgba(255,255,255,.065);
-  background: linear-gradient(160deg, rgba(13,17,24,.50), rgba(8,10,14,.38));
+  border-color: rgba(255,255,255,.07);
+  background: linear-gradient(160deg, rgba(13,17,24,.52), rgba(8,10,14,.40));
 }
 
 .project-card--planned .project-status,
 .project-card--planned .project-meta,
-.project-card--planned .tags span { color: #68727e; }
-.project-card--planned .project-identity { opacity: .72; }
-.project-card--planned h3 { color: #c9d0d8; }
-.project-card--planned > p { color: #7f8995; }
+.project-card--planned .tags span { color: #697581; }
+.project-card--planned .project-identity { opacity: .78; }
+.project-card--planned h3 { color: #cbd2d9; }
+.project-card--planned > p { color: #828d98; }
 
-/* Loaded after highlights.css so planned work stays visually quieter than verified work. */
-.project-card--planned:hover,
-.project-card--planned:focus-within,
-.project-card--planned:active {
+/* This file loads after highlights.css, so restate the glow intentionally instead of overriding it away. */
+.project-card:hover,
+.project-card:focus-within,
+.project-card:active {
+  transform: translateY(-4px);
+  border-color: rgba(128,242,190,.52);
+  background: linear-gradient(160deg, rgba(20,35,31,.92), rgba(9,13,18,.68));
+  box-shadow:
+    0 24px 58px rgba(0,0,0,.32),
+    0 0 42px rgba(128,242,190,.14),
+    0 0 78px rgba(128,242,190,.055),
+    inset 0 0 42px rgba(128,242,190,.035);
+}
+
+.project-card:hover .project-identity,
+.project-card:focus-within .project-identity,
+.project-card:active .project-identity {
   transform: translateY(-1px);
-  border-color: rgba(255,255,255,.10);
-  background: linear-gradient(160deg, rgba(14,19,25,.58), rgba(8,10,14,.42));
-  box-shadow: 0 10px 26px rgba(0,0,0,.16);
+  border-color: rgba(128,242,190,.42);
+  background: rgba(128,242,190,.075);
+  box-shadow: 0 0 30px rgba(128,242,190,.15), inset 0 0 30px rgba(128,242,190,.045);
+}
+
+.project-card--featured:hover,
+.project-card--featured:focus-within,
+.project-card--featured:active {
+  transform: translateY(-5px);
+  border-color: rgba(128,242,190,.64);
+  background:
+    radial-gradient(circle at 82% 16%, rgba(128,242,190,.22), transparent 27%),
+    radial-gradient(circle at 66% 74%, rgba(128,242,190,.09), transparent 25%),
+    linear-gradient(145deg, rgba(20,39,33,.96), rgba(8,12,16,.76));
+  box-shadow:
+    0 30px 78px rgba(0,0,0,.38),
+    0 0 54px rgba(128,242,190,.18),
+    0 0 104px rgba(128,242,190,.075),
+    inset 0 0 58px rgba(128,242,190,.045);
 }
 
 .activity-strip {
-  margin-top: 28px;
-  padding: 24px;
-  border: 1px solid var(--line);
+  margin-top: 34px;
+  padding: 26px;
+  border: 1px solid rgba(128,242,190,.13);
   border-radius: 18px;
   background:
-    linear-gradient(90deg, rgba(128,242,190,.025), transparent 35%),
-    rgba(8,11,16,.56);
+    linear-gradient(90deg, rgba(128,242,190,.04), transparent 38%),
+    rgba(8,11,16,.60);
+  box-shadow: inset 0 0 36px rgba(128,242,190,.018);
 }
 
 .activity-strip-head {
@@ -127,8 +234,8 @@
 
 .activity-strip-head h3 {
   margin: 8px 0 0;
-  font-size: 1.32rem;
-  letter-spacing: -.025em;
+  font-size: 1.38rem;
+  letter-spacing: -.03em;
 }
 
 .activity-strip-head > a {
@@ -165,10 +272,10 @@
 
 .activity-card:hover,
 .activity-card:focus-visible {
-  transform: translateY(-2px);
-  border-color: rgba(128,242,190,.27);
-  background: linear-gradient(155deg, rgba(17,27,27,.82), rgba(8,12,16,.72));
-  box-shadow: 0 14px 32px rgba(0,0,0,.22), 0 0 22px rgba(128,242,190,.045);
+  transform: translateY(-3px);
+  border-color: rgba(128,242,190,.38);
+  background: linear-gradient(155deg, rgba(18,31,29,.88), rgba(8,12,16,.72));
+  box-shadow: 0 18px 38px rgba(0,0,0,.26), 0 0 30px rgba(128,242,190,.09);
 }
 
 .activity-card-top {
@@ -181,7 +288,8 @@
   text-transform: uppercase;
 }
 
-.activity-card-top span:first-child { color: #8fa89a; }
+.activity-card-top span:first-child { color: #91aa9c; }
+
 .activity-card strong {
   margin-top: 20px;
   color: #dce3e7;
@@ -202,29 +310,67 @@
 .activity-card:hover .activity-card-link,
 .activity-card:focus-visible .activity-card-link { color: var(--accent); }
 
-@media (max-width: 920px) {
+@media (max-width: 1050px) {
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-card { grid-column: span 1; }
+  .project-card--featured { grid-column: 1 / -1; }
   .activity-grid { grid-template-columns: 1fr; }
   .activity-card { min-height: 128px; }
 }
 
 @media (max-width: 720px) {
-  .project-title-row { margin-top: 36px; gap: 14px; }
-  .project-identity { width: 48px; height: 48px; border-radius: 13px; }
-  .project-identity svg:not(.brand-mark) { width: 30px; height: 30px; }
-  .project-title-row h3 { font-size: 1.45rem; }
+  .project-grid { grid-template-columns: 1fr; }
+  .project-card,
+  .project-card--featured { grid-column: 1; }
 
-  .activity-strip { margin-top: 18px; padding: 18px; border-radius: 15px; }
+  .project-card--featured {
+    min-height: 0;
+    padding: 28px 24px;
+  }
+
+  .project-card--featured::after {
+    width: 250px;
+    right: -80px;
+    top: 62px;
+    opacity: .10;
+  }
+
+  .project-title-row,
+  .project-card--featured .project-title-row { margin-top: 38px; gap: 14px; }
+
+  .project-identity,
+  .project-card--featured .project-identity {
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+  }
+
+  .project-identity svg:not(.brand-mark),
+  .project-card--featured .project-identity svg:not(.brand-mark) {
+    width: 31px;
+    height: 31px;
+  }
+
+  .project-title-row h3,
+  .project-card--featured .project-title-row h3 { font-size: 1.55rem; }
+
+  .project-card--featured > p { font-size: .92rem; }
+
+  .activity-strip { margin-top: 20px; padding: 18px; border-radius: 15px; }
   .activity-strip-head { align-items: flex-start; flex-direction: column; gap: 13px; }
   .activity-card-top { align-items: flex-start; flex-direction: column; gap: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-card--planned,
+  .project-card,
+  .project-identity,
   .activity-strip-head > a,
   .activity-card { transition: none; }
 
-  .project-card--planned:hover,
-  .project-card--planned:focus-within,
+  .project-card:hover,
+  .project-card:focus-within,
+  .project-card:active,
+  .project-identity,
   .activity-strip-head > a:hover,
   .activity-strip-head > a:focus-visible,
   .activity-card:hover,
