@@ -26,6 +26,15 @@ export type OmarchyUpdate = OmarchyReleaseUpdate | OmarchyPrUpdate
 
 export const omarchyUpdates: OmarchyUpdate[] = [
   {
+    "kind": "pr",
+    "prNumber": 12480,
+    "title": "Stop fingerprint setup when fprintd exposes no device",
+    "href": "https://github.com/omacom/omarchy/pull/12480",
+    "id": "pr:12480:opened",
+    "date": "2026-09-19",
+    "event": "opened"
+  },
+  {
     "id": "release:contrib:context-snapshot:omarchy-context-snapshot:v1.0.0:2026-09-10",
     "kind": "release",
     "date": "2026-09-10",

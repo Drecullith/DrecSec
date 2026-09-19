@@ -21,6 +21,15 @@ export type OmarchyTool = {
 
 export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
+    "number": 12480,
+    "title": "Stop fingerprint setup when fprintd exposes no device",
+    "state": "open",
+    "createdAt": "2026-09-19T02:24:57Z",
+    "href": "https://github.com/omacom/omarchy/pull/12480",
+    "issue": null,
+    "test": "test/shell.d/fingerprint-setup-readiness-test.sh"
+  },
+  {
     "number": 11089,
     "title": "Add out-of-band plugin rescue",
     "state": "open",
