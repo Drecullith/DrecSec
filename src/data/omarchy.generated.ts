@@ -21,6 +21,15 @@ export type OmarchyTool = {
 
 export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
+    "number": 12598,
+    "title": "Preserve existing Snapper retention policy",
+    "state": "open",
+    "createdAt": "2026-09-20T03:56:50Z",
+    "href": "https://github.com/omacom/omarchy/pull/12598",
+    "issue": "#12551",
+    "test": "test/shell.d/snapper-test.sh"
+  },
+  {
     "number": 12480,
     "title": "Stop fingerprint setup when fprintd exposes no device",
     "state": "open",
@@ -131,7 +140,7 @@ export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
     "number": 10623,
     "title": "Fix explicit bar toggle direction",
-    "state": "open",
+    "state": "closed",
     "createdAt": "2026-09-07T09:58:38Z",
     "href": "https://github.com/omacom/omarchy/pull/10623",
     "issue": "#10621",
@@ -140,7 +149,7 @@ export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
     "number": 10535,
     "title": "Use Ctrl+V for clipboard image paste",
-    "state": "open",
+    "state": "closed",
     "createdAt": "2026-09-06T19:53:56Z",
     "href": "https://github.com/omacom/omarchy/pull/10535",
     "issue": "#10526",

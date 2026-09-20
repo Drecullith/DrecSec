@@ -27,6 +27,33 @@ export type OmarchyUpdate = OmarchyReleaseUpdate | OmarchyPrUpdate
 export const omarchyUpdates: OmarchyUpdate[] = [
   {
     "kind": "pr",
+    "prNumber": 10623,
+    "title": "Fix explicit bar toggle direction",
+    "href": "https://github.com/omacom/omarchy/pull/10623",
+    "id": "pr:10623:closed",
+    "date": "2026-09-20",
+    "event": "closed"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10535,
+    "title": "Use Ctrl+V for clipboard image paste",
+    "href": "https://github.com/omacom/omarchy/pull/10535",
+    "id": "pr:10535:closed",
+    "date": "2026-09-20",
+    "event": "closed"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 12598,
+    "title": "Preserve existing Snapper retention policy",
+    "href": "https://github.com/omacom/omarchy/pull/12598",
+    "id": "pr:12598:opened",
+    "date": "2026-09-20",
+    "event": "opened"
+  },
+  {
+    "kind": "pr",
     "prNumber": 12480,
     "title": "Stop fingerprint setup when fprintd exposes no device",
     "href": "https://github.com/omacom/omarchy/pull/12480",
