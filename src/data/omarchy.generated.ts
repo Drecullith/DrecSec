@@ -59,7 +59,7 @@ export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
     "number": 10899,
     "title": "Bound running browser policy refreshes",
-    "state": "open",
+    "state": "closed",
     "createdAt": "2026-09-08T23:18:02Z",
     "href": "https://github.com/omacom/omarchy/pull/10899",
     "issue": "#10636",
@@ -68,7 +68,7 @@ export const omarchyPullRequests: OmarchyPullRequest[] = [
   {
     "number": 10890,
     "title": "Classify T2 built-in trackpads as internal",
-    "state": "open",
+    "state": "closed",
     "createdAt": "2026-09-08T22:27:50Z",
     "href": "https://github.com/omacom/omarchy/pull/10890",
     "issue": "#10815",

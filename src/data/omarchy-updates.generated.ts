@@ -27,6 +27,24 @@ export type OmarchyUpdate = OmarchyReleaseUpdate | OmarchyPrUpdate
 export const omarchyUpdates: OmarchyUpdate[] = [
   {
     "kind": "pr",
+    "prNumber": 10899,
+    "title": "Bound running browser policy refreshes",
+    "href": "https://github.com/omacom/omarchy/pull/10899",
+    "id": "pr:10899:closed",
+    "date": "2026-09-21",
+    "event": "closed"
+  },
+  {
+    "kind": "pr",
+    "prNumber": 10890,
+    "title": "Classify T2 built-in trackpads as internal",
+    "href": "https://github.com/omacom/omarchy/pull/10890",
+    "id": "pr:10890:closed",
+    "date": "2026-09-21",
+    "event": "closed"
+  },
+  {
+    "kind": "pr",
     "prNumber": 10623,
     "title": "Fix explicit bar toggle direction",
     "href": "https://github.com/omacom/omarchy/pull/10623",
