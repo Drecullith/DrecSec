@@ -36,7 +36,7 @@ export const omarchyPullRequests: OmarchyPullRequest[] = [
     "createdAt": "2026-09-19T02:24:57Z",
     "href": "https://github.com/omacom/omarchy/pull/12480",
     "issue": null,
-    "test": "test/shell.d/fingerprint-setup-readiness-test.sh"
+    "test": "test/shell.d/fingerprint-package-test.sh"
   },
   {
     "number": 11089,
